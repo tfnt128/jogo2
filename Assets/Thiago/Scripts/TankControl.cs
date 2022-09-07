@@ -5,35 +5,98 @@ using UnityEngine;
 public class TankControl : MonoBehaviour
 {
     public GameObject player;
-    public bool isMoving;
-    public bool isRunning = false;
-    public float horizontalMove;
-    public float verticalMove;
-    public float horizontalSpeed = 150;
+    bool isMoving;
+    bool pressedD;
+    bool isTurning = false;
+    bool isRunning = false;
+    float horizontalMove;
+    public float verticalMove = 3.8f;
+    public float horizontalSpeed = 150f;
 
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
-        
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        if(Input.GetKey(KeyCode.D) && !isTurning)
+        {
+            pressedD = true;            
+        }      
+        if (Input.GetKey(KeyCode.A) && !isTurning)
+        {
+            pressedD = false;
+        }
+
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
+
+
+        if (Input.GetButton("Horizontal"))
+        {
+            isTurning = true;
+            player.transform.Rotate(0, horizontalMove, 0);
+            horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * horizontalSpeed;
+
+            if (!isMoving)
+            {
+                if (pressedD)
+                {
+                    player.GetComponent<Animator>().Play("Right");
+                }
+                else
+                {
+                    player.GetComponent<Animator>().Play("Left");
+                }               
+            }            
+        }
+        else
+        {
+            isTurning = false;
+        }
+
+
+        if (Input.GetButton("Vertical"))
         {
            
             isMoving = true;
-            player.GetComponent<Animator>().Play("Walk");
-            horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * horizontalSpeed;
-            verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 3.9f;
-            player.transform.Rotate(0, horizontalMove, 0);
+
+            if (Input.GetButton("SKey"))
+            {
+                player.GetComponent<Animator>().Play("WalkBack");
+            }
+            else
+            {
+                if(!isRunning)
+                {
+                    verticalMove = 3f;
+                    player.GetComponent<Animator>().Play("Walk");
+                }
+                else
+                {
+                    verticalMove = 8f;
+                    player.GetComponent<Animator>().Play("Run");
+                }
+            }         
+
+            verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalMove;  
             player.transform.Translate(0,0, verticalMove);
-            
         }
         else
         {
             isMoving = false;
+        }
+
+
+        if(!isMoving && !isTurning)
+        {
+            
             player.GetComponent<Animator>().Play("Idle");
         }
+        
     }
 }
