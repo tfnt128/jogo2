@@ -6,6 +6,8 @@ using UnityEngine;
 public class ModernController : MonoBehaviour
 {
 
+    //animação
+    //Rotation melhor;
 
     private float speed = 100f;
 
