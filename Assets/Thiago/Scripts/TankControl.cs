@@ -109,6 +109,10 @@ public class TankControl : MonoBehaviour
             {
                 velocity += Time.deltaTime * acceleration;
             }
+            if (forwardPressed && !isRunning && velocity > 2.0f)
+            {
+                velocity -= Time.deltaTime * deceleration;
+            }
             if (!forwardPressed && velocity > 1.0f)
             {
                 velocity -= Time.deltaTime * deceleration;

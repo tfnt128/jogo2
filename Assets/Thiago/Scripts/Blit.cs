@@ -213,7 +213,7 @@ namespace Cyan
 
             if (settings.blitMaterial == null)
             {
-                Debug.LogWarningFormat("Missing Blit Material. {0} blit pass will not execute. Check for missing reference in the assigned renderer.", GetType().Name);
+              //  Debug.LogWarningFormat("Missing Blit Material. {0} blit pass will not execute. Check for missing reference in the assigned renderer.", GetType().Name);
                 return;
             }
 
