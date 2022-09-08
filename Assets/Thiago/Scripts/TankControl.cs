@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TankControl : MonoBehaviour
 {
+
     public GameObject player;
     public bool isMoving;
     public bool isBacking;
@@ -94,8 +95,8 @@ public class TankControl : MonoBehaviour
             yield return new WaitForSeconds(1.18f);
             canStopAnim = false;
         }
-
-        void MovementAnimation()
+    }
+    void MovementAnimation()
         {
             bool forwardPressed = Input.GetKey("w");
             bool rightPressed = Input.GetKey("d");
@@ -148,6 +149,4 @@ public class TankControl : MonoBehaviour
                 velocityX -= Time.deltaTime * deceleration;
             }
         }
-
-    }
 }
