@@ -2026,8 +2026,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 837285415}
-  verticalMove: 0
+  isMoving: 0
+  isBacking: 0
+  verticalSpeed: 3.8
   horizontalSpeed: 150
+  acceleration: 2
+  deceleration: 3
 --- !u!54 &837285424
 Rigidbody:
   m_ObjectHideFlags: 0

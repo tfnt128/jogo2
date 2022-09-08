@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 4237
+  controlID: 3834
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 4213
+  controlID: 3835
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 4214
+  controlID: 3836
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,8 +226,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d46e0000
-      m_LastClickedID: 28372
+      m_SelectedIDs: 88710000
+      m_LastClickedID: 0
       m_ExpandedIDs: eafaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 0
     width: 826.39996
     height: 505.6
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 8}
@@ -280,7 +280,7 @@ MonoBehaviour:
   - {fileID: 9}
   - {fileID: 10}
   m_Selected: 1
-  m_LastSelected: 0
+  m_LastSelected: 2
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.067904, y: 0.8200275, z: -0.09973134, w: 0.55957335}
     speed: 2
-    m_Value: {x: 0.067904, y: 0.8200275, z: -0.09973135, w: 0.55957335}
+    m_Value: {x: 0.06789977, y: 0.81997633, z: -0.09972513, w: 0.5595385}
   m_Size:
     m_Target: 0.70710677
     speed: 2
@@ -1012,22 +1012,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Thiago/Scripts
+    - Assets/Thiago/Animations
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 50
   m_LastFolders:
-  - Assets/Thiago/Scripts
+  - Assets/Thiago/Animations
   m_LastFoldersGridSize: 50
   m_LastProjectPath: C:\Users\thiag\OneDrive\Documentos\GitHub\jogo2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 135.80002}
-    m_SelectedIDs: 96730000
-    m_LastClickedID: 29590
-    m_ExpandedIDs: 00000000d4710000d6710000d8710000da710000dc710000de710000e0710000e2710000e471000000ca9a3b
+    m_SelectedIDs: 88730000
+    m_LastClickedID: 29576
+    m_ExpandedIDs: 00000000d0710000d2710000d4710000d6710000d8710000da710000dc710000de710000e071000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1055,7 +1055,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d4710000d6710000d8710000da710000dc710000de710000e0710000e2710000e471000000ca9a3b
+    m_ExpandedIDs: 00000000d0710000d2710000d4710000d6710000d8710000da710000dc710000de710000e071000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1080,8 +1080,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d46e0000
-    m_LastClickedInstanceID: 28372
+    m_SelectedInstanceIDs: 88710000
+    m_LastClickedInstanceID: 29064
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000dc7e00005296000000000000
     m_RenameOverlay:
@@ -1159,8 +1159,8 @@ MonoBehaviour:
     y: 0
     width: 446.40002
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
