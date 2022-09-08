@@ -2671,7 +2671,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3893294198833146316}
   - component: {fileID: 6982812147129791414}
-  - component: {fileID: 4416926082007675772}
+  - component: {fileID: 6982812147129791417}
+  - component: {fileID: 6982812147129791416}
   - component: {fileID: 6982812147129791415}
   m_Layer: 8
   m_Name: Player
@@ -2680,24 +2681,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!143 &4416926082007675772
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4416926082007675766}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.8
-  m_Radius: 0.28
-  m_SlopeLimit: 45
-  m_StepOffset: 0.25
-  m_SkinWidth: 0.02
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!1 &4523139366993856298
 GameObject:
   m_ObjectHideFlags: 0
@@ -3392,12 +3375,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 4416926082007675766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13acedf108e7c444e82eb772a7a26b2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f204cbb278c2324a9780ea7c0515878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
   moveDirection: {x: 0, y: 0, z: 0}
   pushDisplacement: {x: 0, y: 0, z: 0}
+--- !u!136 &6982812147129791416
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926082007675766}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.29
+  m_Height: 1.7510936
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.887591, z: 0}
+--- !u!54 &6982812147129791417
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926082007675766}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 16
+  m_CollisionDetection: 0
 --- !u!4 &6983258931433245551
 Transform:
   m_ObjectHideFlags: 0
