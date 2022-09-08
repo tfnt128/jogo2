@@ -17,7 +17,7 @@ public class TankControl : MonoBehaviour
 
     Animator anim;
     float velocityX = 0.0f;
-    float velocity = 0.0f;
+    float velocityY = 0.0f;
     public float acceleration = 0.1f;
     public float deceleration = 0.1f;
 
@@ -29,7 +29,7 @@ public class TankControl : MonoBehaviour
     private void Update()
     {
         MovementAnimation();
-        anim.SetFloat("Velocity", velocity);
+        anim.SetFloat("Velocity", velocityY);
         anim.SetFloat("VelocityX", velocityX);
 
 
@@ -102,29 +102,29 @@ public class TankControl : MonoBehaviour
             bool rightPressed = Input.GetKey("d");
             bool leftpressed = Input.GetKey("a");
             bool runPressed = Input.GetKey("left shift");
-            if (forwardPressed && velocity < 2.0f)
+            if (forwardPressed && velocityY < 2.0f)
             {
-                velocity += Time.deltaTime * acceleration;
+                velocityY += Time.deltaTime * acceleration;
             }
-            if (forwardPressed && runPressed && velocity < 3.0f)
+            if (forwardPressed && runPressed && velocityY < 3.0f)
             {
-                velocity += Time.deltaTime * acceleration;
+                velocityY += Time.deltaTime * acceleration;
             }
-            if (forwardPressed && !isRunning && velocity > 2.0f)
+            if (forwardPressed && !isRunning && velocityY > 2.0f)
             {
-                velocity -= Time.deltaTime * deceleration;
+                velocityY -= Time.deltaTime * deceleration;
             }
-            if (!forwardPressed && velocity > 1.0f)
+            if (!forwardPressed && velocityY > 1.0f)
             {
-                velocity -= Time.deltaTime * deceleration;
+                velocityY -= Time.deltaTime * deceleration;
             }
-            if (!forwardPressed && !isBacking && velocity < 1.0f)
+            if (!forwardPressed && !isBacking && velocityY < 1.0f)
             {
-                velocity += Time.deltaTime * acceleration;
+                velocityY += Time.deltaTime * acceleration;
             }
-            if (isBacking && velocity > 0.0f)
+            if (isBacking && velocityY > 0.0f)
             {
-                velocity -= Time.deltaTime * deceleration;
+                velocityY -= Time.deltaTime * deceleration;
             }
 
 

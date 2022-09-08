@@ -5,20 +5,15 @@ using Cinemachine;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    
-    public GameObject targetCamera;
+
+    public GameObject On;
+    public GameObject Off;
     private void OnTriggerStay(Collider collision)
     {
         if(collision.tag == "Player")
         {
-            targetCamera.SetActive(true);
-        }
-    }
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.tag == "Player")
-        {
-            targetCamera.SetActive(false);
+            On.SetActive(true);
+            Off.SetActive(false);
         }
     }
 }

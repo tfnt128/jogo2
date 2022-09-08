@@ -9,7 +9,7 @@ public class ModernController : MonoBehaviour
     //animação
     //Rotation melhor;
 
-    private float speed = 100f;
+    private float speed = 300f;
 
     GameObject mainCamera;
 
@@ -24,14 +24,22 @@ public class ModernController : MonoBehaviour
 
     private Vector3 viewRight = Vector3.zero;
 
+    Animator anim;
+    float velocity = 0.0f;
+    public float acceleration = 0.1f;
+    public float deceleration = 0.1f;
+
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         MyRb = GetComponent<Rigidbody>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     private void Update()
     {
+        MovementAnimation();
+        anim.SetFloat("Velocity", velocity);
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
@@ -56,5 +64,31 @@ public class ModernController : MonoBehaviour
         }
 
         MyRb.velocity = moveDirection * speed * Time.deltaTime;
+    }
+    void MovementAnimation()
+    {
+        bool forwardPressed = Input.GetKey("w");
+        bool leftPressed = Input.GetKey("a");
+        bool rightPressed = Input.GetKey("d");
+        bool downPressed = Input.GetKey("s");
+        bool runPressed = Input.GetKey("left shift");
+        if ((forwardPressed || leftPressed || rightPressed || downPressed) && velocity < 2.0f)
+        {
+            velocity += Time.deltaTime * acceleration;
+        }
+        if ((forwardPressed || leftPressed || rightPressed || downPressed) && runPressed && velocity < 3.0f)
+        {
+            velocity += Time.deltaTime * acceleration;
+        }
+
+        if ((!forwardPressed && !leftPressed && !rightPressed && !downPressed) && velocity > 1.0f)
+        {
+            velocity -= Time.deltaTime * deceleration;
+        }
+        if (velocity < 1.0f)
+        {
+            velocity = 1.0f;
+        }
+
     }
 }
