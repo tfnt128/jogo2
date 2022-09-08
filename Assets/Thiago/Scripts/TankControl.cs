@@ -9,8 +9,8 @@ public class TankControl : MonoBehaviour
     public bool isMoving;
     public bool isBacking;
     bool isRunning = false;
-    float horizontalMove;
-    float verticalMove;
+   public float horizontalMove;
+   public float verticalMove;
     bool canStopAnim;
     public float verticalSpeed = 3.8f;
     public float horizontalSpeed = 150f;
