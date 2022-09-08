@@ -51,28 +51,4 @@ public class CCThirdPersonCharacter : MonoBehaviour
         cc.Move((moveDirection * speed + velocity) * Time.deltaTime);
         pushDisplacement *= 0.94f;
     }
-
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Debug.DrawRay(hit.point, hit.normal, Color.magenta);
-        pushDisplacement += hit.moveDirection;
-        if (velocity.y < 0f && Vector3.Dot(hit.normal, Vector3.down) < -0.5f)
-        {
-            if (velocity.y < -5f)
-            {
-                GameObject.Find("Dust").GetComponent<ParticleSystem>().Play();
-                GameObject.Find("Dust").transform.position = base.transform.position + Vector3.up * 0.1f;
-            }
-            velocity.y = 0f;
-        }
-        float num = 20f;
-        Rigidbody attachedRigidbody = hit.collider.attachedRigidbody;
-        if (!(attachedRigidbody == null) && !attachedRigidbody.isKinematic && !(hit.moveDirection.y < -0.3f))
-        {
-            Vector3 vector = Vector3.Scale(hit.normal, new Vector3(-1f, -1f, -1f));
-            attachedRigidbody.AddForceAtPosition(vector * num, hit.point, ForceMode.Force);
-        }
-    }
 }

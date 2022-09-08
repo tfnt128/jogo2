@@ -5,50 +5,54 @@ using UnityEngine;
 
 public class ModernController : MonoBehaviour
 {
-    GameObject gameCamera;
+
+
+    private float speed = 100f;
+
+    GameObject mainCamera;
+
+    float horizontalInput;
+    float verticalInput;
+
     Rigidbody MyRb;
 
-    float inputHorizontal;
-    float inputVerttical;
-    public float speed = 20f;
-    public float turnSpeed = 150f;
+    public Vector3 moveDirection;
 
-    private void Start()
+    private Vector3 viewForward = Vector3.zero;
+
+    private Vector3 viewRight = Vector3.zero;
+
+    private void Awake()
     {
         MyRb = GetComponent<Rigidbody>();
-        gameCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
+
     private void Update()
     {
-        float inputHorizontal = Input.GetAxisRaw("Horizontal");
-        float inputVertical = Input.GetAxisRaw("Vertical");
-
-        float h = inputHorizontal * Time.deltaTime * speed;
-        float v = inputVertical * Time.deltaTime * speed;
-
-        Move(h, v);
-
-        //Debug.Log("Vertical = " + inputVerttical + "   " + "Horizontal = " + inputHorizontal);
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
     }
 
-    void Move(float h, float v)
+    private void FixedUpdate()
     {
-        Vector3 moveX = gameCamera.transform.right * h;
-        Vector3 moveZ = gameCamera.transform.forward * v;
-        Vector3 move = moveX + moveZ;
-
-        Vector3 moveTarget = new Vector3(move.x, 0, move.y);
-
-        Transform lastCamPos = gameCamera.transform;
-
-        if (moveTarget != Vector3.zero)
+        if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
         {
-            if (lastCamPos)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveTarget), turnSpeed * 2 * Time.deltaTime);
-            }
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            viewForward = Vector3.Scale(mainCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
+            viewRight = Vector3.Scale(mainCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
+            viewRight = new Vector3(viewForward.z, 0f, viewForward.x * -1f);
+        }
+        moveDirection = verticalInput * viewForward + horizontalInput * viewRight;
+        if (moveDirection.sqrMagnitude > 1f)
+        {
+            moveDirection.Normalize();
+        }
+        if (moveDirection.sqrMagnitude != 0f)
+        {
+            base.transform.forward = moveDirection;
         }
 
-        MyRb.AddForce(move * speed);
+        MyRb.velocity = moveDirection * speed * Time.deltaTime;
     }
 }
