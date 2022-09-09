@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class ShotZone : MonoBehaviour
 {
-    CinemachineVirtualCamera currentCamera;
+    public CinemachineVirtualCamera currentCamera;
     public CinemachineVirtualCamera targetCamera;
     Player player;
 
