@@ -11,7 +11,7 @@ public class ModernController : MonoBehaviour
 
     private float speed = 300f;
 
-    GameObject mainCamera;
+    GameObject currentCamera;
 
     float horizontalInput;
     float verticalInput;
@@ -33,7 +33,7 @@ public class ModernController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         MyRb = GetComponent<Rigidbody>();
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
     }
 
     private void Update()
@@ -48,10 +48,12 @@ public class ModernController : MonoBehaviour
     {
         if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
         {
-            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            viewForward = Vector3.Scale(mainCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
-            viewRight = Vector3.Scale(mainCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
+
+            currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
+            viewForward = Vector3.Scale(currentCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
+            viewRight = Vector3.Scale(currentCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
             viewRight = new Vector3(viewForward.z, 0f, viewForward.x * -1f);
+
         }
         moveDirection = verticalInput * viewForward + horizontalInput * viewRight;
         if (moveDirection.sqrMagnitude > 1f)

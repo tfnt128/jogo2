@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - CurrentCamera
+  - InactiveCamera
   layers:
   - Default
   - TransparentFX
