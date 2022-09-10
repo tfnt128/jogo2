@@ -6,10 +6,7 @@ using UnityEngine;
 public class ModernController : MonoBehaviour
 {
 
-    //animação
-    //Rotation melhor;
-
-    private float speed = 300f;
+    public float speed;
 
     [SerializeField] GameObject currentCamera;
 
@@ -23,6 +20,10 @@ public class ModernController : MonoBehaviour
     private Vector3 viewForward = Vector3.zero;
 
     private Vector3 viewRight = Vector3.zero;
+
+    bool isRunning;
+    bool isWalking;
+
 
     Animator anim;
     float velocity = 0.0f;
@@ -42,18 +43,38 @@ public class ModernController : MonoBehaviour
 
     private void Update()
     {
+       
+        if (Input.GetButton("Run") && isWalking)
+        {
+            isRunning = true;
+            speed = 400f;
+        }
+        else
+        {
+            isRunning = false;
+            speed = 200f;
+        }
+
         MovementAnimation();
         anim.SetFloat("Velocity", velocity);
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
         if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
-        {
-            Debug.Log("Andou");
+        {           
             currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
             viewForward = Vector3.Scale(currentCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
             viewRight = Vector3.Scale(currentCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
             viewRight = new Vector3(viewForward.z, 0f, viewForward.x * -1f);
+        }
+
+        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        {
+            isWalking = true;
+        }        
+        else
+        {
+            isWalking = false;
         }
     }
 
@@ -88,6 +109,10 @@ public class ModernController : MonoBehaviour
         }
 
         if ((!forwardPressed && !leftPressed && !rightPressed && !downPressed) && velocity > 1.0f)
+        {
+            velocity -= Time.deltaTime * deceleration;
+        }
+        if ((forwardPressed || leftPressed || rightPressed || downPressed) && !isRunning && velocity > 2.0f)
         {
             velocity -= Time.deltaTime * deceleration;
         }

@@ -2263,6 +2263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6bb4e77a737e5419468e04987603f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCamera: {fileID: 0}
   targetCamera: {fileID: 808012876}
 --- !u!114 &636077159
 MonoBehaviour:
@@ -3334,6 +3335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6bb4e77a737e5419468e04987603f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCamera: {fileID: 0}
   targetCamera: {fileID: 719706253}
 --- !u!114 &1052152122
 MonoBehaviour:
@@ -4309,6 +4311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6bb4e77a737e5419468e04987603f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCamera: {fileID: 0}
   targetCamera: {fileID: 1011424952}
 --- !u!114 &1339680294
 MonoBehaviour:
@@ -5964,6 +5967,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1968850973150846645, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968850973150846645, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
+      propertyPath: acceleration
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3953623109480204467, guid: a311f497a5223f8499da2bcf80e53d89,
         type: 3}
       propertyPath: m_RootOrder
@@ -6023,6 +6036,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935045973863961286, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935045973863961288, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935045973863961288, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a311f497a5223f8499da2bcf80e53d89, type: 3}

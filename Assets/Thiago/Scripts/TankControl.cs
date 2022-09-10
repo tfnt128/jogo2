@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TankControl : MonoBehaviour
 {
@@ -20,9 +21,11 @@ public class TankControl : MonoBehaviour
     float velocityY = 0.0f;
     public float acceleration = 0.1f;
     public float deceleration = 0.1f;
-
+    Rigidbody MyRb;
+    Vector3 move;
     private void Start()
     {
+        MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
 
@@ -64,7 +67,7 @@ public class TankControl : MonoBehaviour
 
             if (Input.GetButton("SKey"))
             {
-                verticalSpeed = 1.5f;
+                verticalSpeed = 300f;
                 isBacking = true;                
             }
             else
@@ -72,15 +75,30 @@ public class TankControl : MonoBehaviour
                 isBacking = false;
                 if (!isRunning)
                 {
-                    verticalSpeed = 3f;                   
+                    verticalSpeed = 500f;                   
                 }
                 else
                 {
-                    verticalSpeed = 8f;                   
+                    verticalSpeed = 1200f;                   
                 }
             }
-            verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
-            player.transform.Translate(0, 0, verticalMove);
+             verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
+            //  player.transform.Translate(0, 0, verticalMove);
+
+            if (isBacking)
+            {
+                move = new Vector3(0, 0, verticalSpeed);
+                MyRb.velocity = player.transform.forward * -verticalSpeed * Time.deltaTime;
+            }
+            else
+            {
+                move = new Vector3(0, 0, verticalSpeed);
+                MyRb.velocity = player.transform.forward * verticalMove;
+            }
+                
+            
+           
+           
         }
         else
         {
