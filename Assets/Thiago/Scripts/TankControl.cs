@@ -67,7 +67,7 @@ public class TankControl : MonoBehaviour
 
             if (Input.GetButton("SKey"))
             {
-                verticalSpeed = 300f;
+                verticalSpeed = 150f;
                 isBacking = true;                
             }
             else
@@ -75,11 +75,11 @@ public class TankControl : MonoBehaviour
                 isBacking = false;
                 if (!isRunning)
                 {
-                    verticalSpeed = 500f;                   
+                    verticalSpeed = 300f;                   
                 }
                 else
                 {
-                    verticalSpeed = 1200f;                   
+                    verticalSpeed = 660f;                   
                 }
             }
              verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
