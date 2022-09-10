@@ -11,7 +11,7 @@ public class ModernController : MonoBehaviour
 
     private float speed = 300f;
 
-    GameObject currentCamera;
+    [SerializeField] GameObject currentCamera;
 
     float horizontalInput;
     float verticalInput;
@@ -33,6 +33,10 @@ public class ModernController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         MyRb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
     }
 
@@ -42,19 +46,19 @@ public class ModernController : MonoBehaviour
         anim.SetFloat("Velocity", velocity);
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-    }
 
-    private void FixedUpdate()
-    {
         if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
         {
-
+            Debug.Log("Andou");
             currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
             viewForward = Vector3.Scale(currentCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
             viewRight = Vector3.Scale(currentCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
             viewRight = new Vector3(viewForward.z, 0f, viewForward.x * -1f);
-
         }
+    }
+
+    private void FixedUpdate()
+    {
         moveDirection = verticalInput * viewForward + horizontalInput * viewRight;
         if (moveDirection.sqrMagnitude > 1f)
         {
@@ -65,7 +69,7 @@ public class ModernController : MonoBehaviour
             base.transform.forward = moveDirection;
         }
 
-        MyRb.velocity = moveDirection * speed * Time.deltaTime;
+        Move();
     }
     void MovementAnimation()
     {
@@ -92,5 +96,9 @@ public class ModernController : MonoBehaviour
             velocity = 1.0f;
         }
 
+    }
+    void Move()
+    {
+        MyRb.velocity = moveDirection * speed * Time.deltaTime;
     }
 }
