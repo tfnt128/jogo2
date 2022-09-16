@@ -65,6 +65,7 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+<<<<<<< HEAD
                 "key": "editor.extrudeEdgesAsGroup",
                 "value": "{\"m_Value\":true}"
             },
@@ -72,6 +73,10 @@
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "smoothing.showPreview",
                 "value": "{\"m_Value\":false}"
+=======
+                "key": "smoothing.showPreview",
+                "value": "{\"m_Value\":true}"
+>>>>>>> c2b4154b2c18ed32b4d2d768e1de3fcc17b0acc0
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -90,12 +95,20 @@
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+<<<<<<< HEAD
                 "key": "editor.stripProBuilderScriptsOnBuild",
+=======
+                "key": "UVEditor.showPreviewMaterial",
+>>>>>>> c2b4154b2c18ed32b4d2d768e1de3fcc17b0acc0
                 "value": "{\"m_Value\":true}"
             },
             {
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+<<<<<<< HEAD
                 "key": "experimental.meshesAreAssets",
+=======
+                "key": "smoothing.previewDither",
+>>>>>>> c2b4154b2c18ed32b4d2d768e1de3fcc17b0acc0
                 "value": "{\"m_Value\":false}"
             },
             {
@@ -204,17 +217,21 @@
                 "value": "{\"m_Value\":{\"x\":0.0,\"y\":0.0,\"z\":0.0,\"w\":1.0}}"
             },
             {
+<<<<<<< HEAD
                 "type": "UnityEngine.ProBuilder.Shapes.Shape, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.Cube",
                 "value": "{}"
             },
             {
+=======
+>>>>>>> c2b4154b2c18ed32b4d2d768e1de3fcc17b0acc0
                 "type": "UnityEngine.ProBuilder.ExtrudeMethod, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "editor.extrudeMethod",
                 "value": "{\"m_Value\":2}"
             },
             {
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+<<<<<<< HEAD
                 "key": "ExtrudeFaces.distance",
                 "value": "{\"m_Value\":0.5}"
             },
@@ -227,6 +244,15 @@
                 "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "uv.uvEditorGridSnapIncrement",
                 "value": "{\"m_Value\":0.125}"
+=======
+                "key": "uv.uvEditorGridSnapIncrement",
+                "value": "{\"m_Value\":0.125}"
+            },
+            {
+                "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "smoothing.PreviewOpacity",
+                "value": "{\"m_Value\":0.5}"
+>>>>>>> c2b4154b2c18ed32b4d2d768e1de3fcc17b0acc0
             }
         ]
     }
