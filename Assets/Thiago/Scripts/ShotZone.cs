@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class ShotZone : MonoBehaviour
 {
-    public CinemachineVirtualCamera currentCamera;
+    CinemachineVirtualCamera currentCamera;
     public CinemachineVirtualCamera targetCamera;
     Player player;
 
@@ -13,7 +13,8 @@ public class ShotZone : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
     }
-    private void OnTriggerStay(Collider other)
+  
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
