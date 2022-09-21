@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &157823743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157823744}
+  m_Layer: 8
+  m_Name: RayUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157823744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157823743}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.346, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3953623109480204467}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1829418898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1829418899}
+  m_Layer: 8
+  m_Name: RayLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1829418899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829418898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3953623109480204467}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &101430868954977679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,9 +1096,9 @@ GameObject:
   - component: {fileID: 6935045973863961289}
   - component: {fileID: 6935045973863961286}
   - component: {fileID: 6935045973863961287}
-  - component: {fileID: 6935045973863961288}
   - component: {fileID: 1968850973150846645}
   - component: {fileID: 405899807}
+  - component: {fileID: 2065770280}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1053,12 +1115,14 @@ Transform:
   m_GameObject: {fileID: 4437672814654755337}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2.6924815, y: 0.70969534, z: 18.32}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2.1579, y: 2.1579, z: 2.1579}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8314732174805986133}
   - {fileID: 8058088050416897121}
   - {fileID: 220686193629263402}
+  - {fileID: 157823744}
+  - {fileID: 1829418899}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1090,14 +1154,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4437672814654755337}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
-  m_UseGravity: 1
+  m_Mass: 60
+  m_Drag: 4
+  m_AngularDrag: 4
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!136 &6935045973863961287
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1108,27 +1172,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.29
-  m_Height: 1.7510936
+  m_Radius: 0.2
+  m_Height: 1.8763301
   m_Direction: 1
-  m_Center: {x: 0, y: 0.887591, z: 0}
---- !u!114 &6935045973863961288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4437672814654755337}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f204cbb278c2324a9780ea7c0515878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  currentCamera: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  acceleration: 2
-  deceleration: 3
+  m_Center: {x: -0, y: 0.8618349, z: -0}
 --- !u!114 &1968850973150846645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,15 +1188,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77638571a9210ef49b3fa928c8a496df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4437672814654755337}
+  _input: {fileID: 0}
+  BlendTreeAcceleration: 3
+  BlendTreeDeceleration: 4
+  isTank: 1
   isMoving: 0
-  isBacking: 0
-  horizontalMove: 0
-  verticalMove: 0
-  verticalSpeed: 3.8
-  horizontalSpeed: 150
-  acceleration: 4
-  deceleration: 3
+  _playerMoveInput: {x: 0, y: 0, z: 0}
+  _playerIsGrounded: 1
+  _groundCheckRadiusMultiplier: 0.9
+  _groundCheckDistanceTolerance: 0.07
+  _playerCenterToGroundDistance: 0
+  _gravityFallCurrent: -25
+  _gravityFallMin: 5000
+  _gravityFallIncrementTime: 0.05
+  _playerFallTimer: 0
+  _gravityGrounded: -1
+  _maxSlopeAngle: 47.5
+  _maxStepHeight: 0.522
+  _minStepDepth: 0.05
+  _stairHeightPaddingMultiplier: 1.5
+  _isFirstStep: 1
+  _firstStepVelocityDistanceMultiplier: 0.1
+  _playerIsAscendingStairs: 0
+  _playerIsDescendingStairs: 0
+  _ascendingStairsMovementMultiplier: 3500
+  _descendingStairsMovementMultiplier: 5000
+  _maximumAngleOfApproachToAscend: 80
 --- !u!114 &405899807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1162,9 +1226,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335902d8588e3394a8b5de242d01bb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fps: 24
+  fps: 20
   speed: 1
   animationStyle: 1
+--- !u!114 &2065770280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437672814654755337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3812917e983f260428294f97a627a721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveIsPressed: 0
 --- !u!1 &4475661574863791701
 GameObject:
   m_ObjectHideFlags: 0

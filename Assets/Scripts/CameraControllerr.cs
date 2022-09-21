@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraControllerr : MonoBehaviour
 {
     public Vector3 targetPos;
 
