@@ -11,6 +11,9 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+    public Collider Stairs;
+    public PhysicMaterial StairsMaterial;
+
     [SerializeField] HumanoidLandInput _input;
     Animator anim;
     Rigidbody MyRb;
@@ -116,7 +119,20 @@ public class PlayerController : MonoBehaviour
         _playerMoveInput = PlayerSlope();
         _playerIsGrounded = PlayerGroundCheck();
         _playerMoveInput.y = PlayerFallGravity();
-       
+
+
+        if (!isMoving)
+        {
+            // Stairs.material.staticFriction = 5;
+            StairsMaterial.staticFriction = 5;
+            StairsMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
+        }
+        else
+        {
+            // Stairs.material.staticFriction = 0;
+            StairsMaterial.staticFriction = 0;
+            StairsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+        }
 
         if (isRunning)
         {

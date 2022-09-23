@@ -6212,6 +6212,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1968850973150846645, guid: a311f497a5223f8499da2bcf80e53d89,
         type: 3}
+      propertyPath: StairsMaterial
+      value: 
+      objectReference: {fileID: 13400000, guid: 2b5c146b6b7a8b04eb2b8e0e237f72df,
+        type: 2}
+    - target: {fileID: 1968850973150846645, guid: a311f497a5223f8499da2bcf80e53d89,
+        type: 3}
       propertyPath: _descendingStairsMovementMultiplier
       value: 1000
       objectReference: {fileID: 0}
