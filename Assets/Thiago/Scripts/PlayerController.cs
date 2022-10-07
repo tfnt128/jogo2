@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-//using UnityEngine.InputSystem;
-//using UnityEngine.InputSystem.Controls;
-//using UnityEngine.Windows;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+    public int life = 100;
     public Collider Stairs;
     public PhysicMaterial StairsMaterial;
 
@@ -109,7 +110,10 @@ public class PlayerController : MonoBehaviour
         {
             ModernControllerUpdate();
         }
-        
+        if(life <= 0)
+        {
+            Debug.Log("You are dead");
+        }
     }
     private void FixedUpdate()
     {
@@ -157,6 +161,14 @@ public class PlayerController : MonoBehaviour
             ModernControllerFixedUpdate();
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EnemyHand")
+        {
+            life -= 33;
+        }
+    }
+
     #endregion
 
     private bool PlayerGroundCheck()
@@ -167,8 +179,6 @@ public class PlayerController : MonoBehaviour
         return ((_playerCenterToGroundDistance >= _capsuleCollider.bounds.extents.y - _groundCheckDistanceTolerance) &&
                 (_playerCenterToGroundDistance <= _capsuleCollider.bounds.extents.y + _groundCheckDistanceTolerance));
     }
-
-
 
     private Vector3 AscendStairs(Vector3 calculatedStepInput)
     {
@@ -346,7 +356,6 @@ public class PlayerController : MonoBehaviour
         return calculatedStepInput;
 
     }
-
      
     private float PlayerFallGravity()
     {
@@ -372,7 +381,6 @@ public class PlayerController : MonoBehaviour
         }
         return gravity;
     }
-
 
     private Vector3 PlayerSlope()
     {
@@ -438,7 +446,6 @@ public class PlayerController : MonoBehaviour
         return calculatedPlayerMovement;
     }
 
-
     private void TankControlUpdate()
     {
         MovementAnimationTank();
@@ -482,11 +489,11 @@ public class PlayerController : MonoBehaviour
                 isBacking = false;
                 if (!isRunning)
                 {
-                    verticalSpeed = 250f;
+                    verticalSpeed = 1000f;
                 }
                 else
                 {
-                    verticalSpeed = 550f;
+                    verticalSpeed = 2000f;
                 }
             }
             verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
@@ -519,8 +526,7 @@ public class PlayerController : MonoBehaviour
             canStopAnim = false;
         }
     }
-   
-    
+      
     private void MovementAnimationTank()
         {
             bool forwardPressed = Input.GetKey("w");
@@ -570,7 +576,6 @@ public class PlayerController : MonoBehaviour
                 velocityX -= Time.deltaTime * BlendTreeDeceleration;
             }
         }
-
    
     private void ModernControllerUpdate()
     {
@@ -611,8 +616,7 @@ public class PlayerController : MonoBehaviour
         v1.y = MyRb.velocity.y;
         MyRb.velocity = v1;
     }
-    
-   
+       
     private void ModernControllerFixedUpdate()
     {
         moveDirection = verticalMove * viewForwardModern + horizontalMove * viewRight;
@@ -624,8 +628,7 @@ public class PlayerController : MonoBehaviour
         {
             base.transform.forward = moveDirection;
         }
-    }
-   
+    }   
     
     private void MovementAnimationModernController()
     {
@@ -656,7 +659,6 @@ public class PlayerController : MonoBehaviour
             velocity = 1.0f;
         }
     }
-
     private Vector3 GetMoveInput()
     {
         return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
