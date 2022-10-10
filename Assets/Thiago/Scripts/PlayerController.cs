@@ -11,10 +11,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool canMove = true;
+    public RaycastHit hitinfo;
+    public bool canOpenDoor = false;
     public int life = 100;
     public Collider Stairs;
     public PhysicMaterial StairsMaterial;
 
+    [SerializeField] LayerMask doorLayer;
     [SerializeField] HumanoidLandInput _input;
     Animator anim;
     Rigidbody MyRb;
@@ -32,8 +36,8 @@ public class PlayerController : MonoBehaviour
     private bool canStopAnim;
     private float verticalSpeed = 3.8f;
     private float horizontalSpeed = 150f;
-    private float velocityX = 0.0f;
-    private float velocityY = 0.0f;
+    public float velocityX = 0.0f;
+    public float velocityY = 0.0f;
 
     [Header("ModernController")]
     private GameObject currentCamera;
@@ -95,6 +99,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
         MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -114,6 +119,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("You are dead");
         }
+
+        RaycastForDoor();
+        
     }
     private void FixedUpdate()
     {
@@ -451,88 +459,102 @@ public class PlayerController : MonoBehaviour
         MovementAnimationTank();
         anim.SetFloat("Velocity", velocityY);
         anim.SetFloat("VelocityX", velocityX);
-
-
-        if (Input.GetButton("Run"))
+        if (canMove)
         {
 
-            if (Input.GetButton("Run") && isBacking)
+
+            
+            
+
+
+            if (Input.GetButton("Run"))
             {
-                StartCoroutine(stopMove());
-                this.GetComponent<Animator>().Play("QuickTurn");
+
+                if (Input.GetButton("Run") && isBacking)
+                {
+                    StartCoroutine(stopMove());
+                    this.GetComponent<Animator>().Play("QuickTurn");
+                }
+                isRunning = true;
             }
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
-
-
-        if (Input.GetButton("Horizontal") && !canStopAnim)
-        {
-            horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * horizontalSpeed;
-            this.transform.Rotate(0, horizontalMove, 0);
-        }
-
-
-        if (Input.GetButton("Vertical") && !canStopAnim)
-        {
-            isMoving = true;
-            if (Input.GetButton("SKey"))
+            else
             {
-                verticalSpeed = 120f;
-                isBacking = true;
+                isRunning = false;
+            }
+
+
+            if (Input.GetButton("Horizontal") && !canStopAnim)
+            {
+                horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * horizontalSpeed;
+                this.transform.Rotate(0, horizontalMove, 0);
+            }
+
+
+            if (Input.GetButton("Vertical") && !canStopAnim)
+            {
+                isMoving = true;
+                if (Input.GetButton("SKey"))
+                {
+                    verticalSpeed = 120f;
+                    isBacking = true;
+                }
+                else
+                {
+                    isBacking = false;
+                    if (!isRunning)
+                    {
+                        verticalSpeed = 1000f;
+                    }
+                    else
+                    {
+                        verticalSpeed = 2000f;
+                    }
+                }
+                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
+
+                if (isBacking)
+                {
+                    var v2 = transform.forward * -verticalSpeed * Time.deltaTime;
+                    v2.y = MyRb.velocity.y;
+                    MyRb.velocity = v2;
+                }
+                else
+                {
+                    var v1 = transform.forward * verticalSpeed * Time.deltaTime;
+                    v1.y = MyRb.velocity.y;
+                    MyRb.velocity = v1;
+
+                }
             }
             else
             {
                 isBacking = false;
-                if (!isRunning)
-                {
-                    verticalSpeed = 1000f;
-                }
-                else
-                {
-                    verticalSpeed = 2000f;
-                }
+                isMoving = false;
             }
-            verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
 
-            if (isBacking)
+
+            IEnumerator stopMove()
             {
-                var v2 = transform.forward * -verticalSpeed * Time.deltaTime;
-                v2.y = MyRb.velocity.y;
-                MyRb.velocity = v2;
+                canStopAnim = true;
+                yield return new WaitForSeconds(1.18f);
+                canStopAnim = false;
             }
-            else
-            {
-                var v1 = transform.forward * verticalSpeed * Time.deltaTime;
-                v1.y = MyRb.velocity.y;
-                MyRb.velocity = v1;
-
-            }
-        }
-        else
-        {
-            isBacking = false;
-            isMoving = false;
+            
         }
 
-
-        IEnumerator stopMove()
-        {
-            canStopAnim = true;
-            yield return new WaitForSeconds(1.18f);
-            canStopAnim = false;
-        }
+        
     }
       
     private void MovementAnimationTank()
         {
+
             bool forwardPressed = Input.GetKey("w");
             bool rightPressed = Input.GetKey("d");
             bool leftpressed = Input.GetKey("a");
             bool runPressed = Input.GetKey("left shift");
+ 
+
+
             if (forwardPressed && velocityY < 2.0f)
             {
                 velocityY += Time.deltaTime * BlendTreeAcceleration;
@@ -559,6 +581,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
+
             if (rightPressed && !leftpressed && !forwardPressed && !isBacking && velocityX < 1.0f)
             {
                 velocityX += Time.deltaTime * BlendTreeAcceleration;
@@ -575,46 +598,67 @@ public class PlayerController : MonoBehaviour
             {
                 velocityX -= Time.deltaTime * BlendTreeDeceleration;
             }
+            if (!canMove && velocityX != 0.0f)
+            {
+                velocityX = 0.0f;
+                
+            }
+            if(!canMove && velocityY != 0.0f)
+            {
+            velocityY = 1.0f;
+            }
+
+        
+        
+        {
+
+        }
+
         }
    
     private void ModernControllerUpdate()
     {
-        if (Input.GetButton("Run") && isMoving)
+        if (canMove)
         {
-            isRunning = true;
-            speed = 550f;
-        }
-        else
-        {
-            isRunning = false;
-            speed = 250f;
-        }
 
-        MovementAnimationModernController();
-        anim.SetFloat("Velocity", velocity);
-        horizontalMove = Input.GetAxisRaw("Horizontal");
-        verticalMove = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
-        {
-            currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
-            viewForwardModern = Vector3.Scale(currentCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
-            viewRight = Vector3.Scale(currentCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
-            viewRight = new Vector3(viewForwardModern.z, 0f, viewForwardModern.x * -1f);
-        }
+            if (Input.GetButton("Run") && isMoving)
+            {
+                isRunning = true;
+                speed = 550f;
+            }
+            else
+            {
+                isRunning = false;
+                speed = 250f;
+            }
 
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-        {
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
+            MovementAnimationModernController();
+            anim.SetFloat("Velocity", velocity);
+            horizontalMove = Input.GetAxisRaw("Horizontal");
+            verticalMove = Input.GetAxisRaw("Vertical");
 
-        var v1 = moveDirection * speed * Time.deltaTime;
-        v1.y = MyRb.velocity.y;
-        MyRb.velocity = v1;
+            if (Input.GetButtonDown("Horizontal") || Input.GetButtonDown("Vertical"))
+            {
+                currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
+                viewForwardModern = Vector3.Scale(currentCamera.transform.forward, new Vector3(1f, 0f, 1f)).normalized;
+                viewRight = Vector3.Scale(currentCamera.transform.right, new Vector3(1f, 0f, 1f)).normalized;
+                viewRight = new Vector3(viewForwardModern.z, 0f, viewForwardModern.x * -1f);
+            }
+
+            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
+
+            var v1 = moveDirection * speed * Time.deltaTime;
+            v1.y = MyRb.velocity.y;
+            MyRb.velocity = v1;
+        }
     }
        
     private void ModernControllerFixedUpdate()
@@ -659,6 +703,22 @@ public class PlayerController : MonoBehaviour
             velocity = 1.0f;
         }
     }
+
+    private void RaycastForDoor()
+    {
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.5f, Color.green);
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
+        {
+           // hitinfo.collider.gameObject;
+            canOpenDoor = true;
+            Debug.Log("DoorAhead");
+        }
+        else
+        {
+            canOpenDoor = false;
+        }
+    }
+    
     private Vector3 GetMoveInput()
     {
         return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
