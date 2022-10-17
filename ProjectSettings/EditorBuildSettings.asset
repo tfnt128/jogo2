@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Alan/AlanScene.unity
-    guid: e9017d5f96b9f09489b4b37e1d6eb914
+    path: Assets/Alan/Start Screen/StartScreen.unity
+    guid: ef97cef07fabd8a45bbe6edab982e902
+  - enabled: 1
+    path: Assets/Alan/StartMenu/StartMenu.unity
+    guid: 855b7c64cc9c97046a89bcd9c5c227eb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ca32edfaf1ec47d43a4e12806929b6e3,
       type: 2}

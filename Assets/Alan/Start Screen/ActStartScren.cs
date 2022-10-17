@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ActStartScren : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ActStartScren : MonoBehaviour
   public Animator Txt;
   public Animator Logo;
   public Animator LightScreen;
+    public AudioSource Button;
 
     //===============================
 
@@ -19,6 +21,7 @@ public class ActStartScren : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
+            Button.Play();
             Logo.SetTrigger("Act");
             Txt.SetTrigger("Act");
             Camera.SetTrigger("Act");
@@ -28,4 +31,5 @@ public class ActStartScren : MonoBehaviour
             LightScreen.SetTrigger("Act");
         }
     }
+
 }
