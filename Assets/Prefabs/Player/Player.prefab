@@ -1115,7 +1115,7 @@ Transform:
   m_GameObject: {fileID: 4437672814654755337}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2.6924815, y: 0.70969534, z: 18.32}
-  m_LocalScale: {x: 2.1579, y: 2.1579, z: 2.1579}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8314732174805986133}
@@ -1188,11 +1188,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77638571a9210ef49b3fa928c8a496df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
+  canOpenDoor: 0
+  life: 100
+  Stairs: {fileID: 0}
+  StairsMaterial: {fileID: 13400000, guid: 2b5c146b6b7a8b04eb2b8e0e237f72df, type: 2}
+  doorLayer:
+    serializedVersion: 2
+    m_Bits: 4096
   _input: {fileID: 0}
   BlendTreeAcceleration: 3
   BlendTreeDeceleration: 4
   isTank: 1
   isMoving: 0
+  velocityX: 0
+  velocityY: 0
   _playerMoveInput: {x: 0, y: 0, z: 0}
   _playerIsGrounded: 1
   _groundCheckRadiusMultiplier: 0.9
@@ -1212,7 +1222,7 @@ MonoBehaviour:
   _playerIsAscendingStairs: 0
   _playerIsDescendingStairs: 0
   _ascendingStairsMovementMultiplier: 3500
-  _descendingStairsMovementMultiplier: 5000
+  _descendingStairsMovementMultiplier: 1000
   _maximumAngleOfApproachToAscend: 80
 --- !u!114 &405899807
 MonoBehaviour:

@@ -503,11 +503,11 @@ public class PlayerController : MonoBehaviour
                     isBacking = false;
                     if (!isRunning)
                     {
-                        verticalSpeed = 1000f;
+                        verticalSpeed = 300f;
                     }
                     else
                     {
-                        verticalSpeed = 2000f;
+                        verticalSpeed = 500f;
                     }
                 }
                 verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
