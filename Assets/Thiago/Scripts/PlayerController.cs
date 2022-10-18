@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public PhysicMaterial StairsMaterial;
 
     [SerializeField] LayerMask doorLayer;
+    [SerializeField] LayerMask itemLayer;
+    public bool canGrab = false;
     [SerializeField] HumanoidLandInput _input;
     Animator anim;
     Rigidbody MyRb;
@@ -154,12 +156,12 @@ public class PlayerController : MonoBehaviour
         {
             _ascendingStairsMovementMultiplier = 300.0f;
         }
-        Debug.Log(_playerMoveInput.y);
+        
         
         
         
 
-        Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 0.5f);
+        Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);
 
         MyRb.AddRelativeForce(_playerMoveInput, ForceMode.Force);
        
@@ -709,7 +711,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.5f, Color.green);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
         {
-           // hitinfo.collider.gameObject;
+            
             canOpenDoor = true;
             Debug.Log("DoorAhead");
         }
@@ -717,6 +719,26 @@ public class PlayerController : MonoBehaviour
         {
             canOpenDoor = false;
         }
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.0f, itemLayer))
+        {
+            canGrab = true;
+            Debug.Log("Item");
+
+            if (hitinfo.collider.tag == "Key")
+            {
+                
+            }
+            
+        }
+        else
+        {
+            canGrab = false;
+        }
+
+        
+
+        
     }
     
     private Vector3 GetMoveInput()
@@ -724,5 +746,5 @@ public class PlayerController : MonoBehaviour
         return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
     }
 
-
+   
 }
