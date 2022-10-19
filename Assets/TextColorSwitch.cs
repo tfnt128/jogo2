@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TextColorSwitch : MonoBehaviour
@@ -34,5 +35,10 @@ public class TextColorSwitch : MonoBehaviour
     void GameobjectOFF()
     {
         Image.SetActive(false);
+    }
+
+    public void ChanceScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 }
