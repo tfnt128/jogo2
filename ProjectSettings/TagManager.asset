@@ -12,6 +12,7 @@ TagManager:
   - Door
   - FadeIn
   - FadeOut
+  - Manager
   layers:
   - Default
   - TransparentFX
