@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public int life = 100;
     public Collider Stairs;
     public PhysicMaterial StairsMaterial;
+
+    Transform doorTransform;
 
     [SerializeField] LayerMask doorLayer;
     [SerializeField] LayerMask itemLayer;
@@ -78,11 +81,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _maximumAngleOfApproachToAscend = 45.0f;
     float _playerHalfHeightToGround = 0.0f;
     float _maxAscendRayDistance = 0.0f;
-    float _maxDescendRayDistance = 0.0f; 
+    float _maxDescendRayDistance = 0.0f;
     int _numberOfStepDetectRays = 0;
     float _rayIncrementAmount = 0.0f;
     Vector3 _playerCenterPoint = Vector3.zero;
-    
+
 
 
 
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        
+
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
         MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -117,20 +120,20 @@ public class PlayerController : MonoBehaviour
         {
             ModernControllerUpdate();
         }
-        if(life <= 0)
+        if (life <= 0)
         {
             Debug.Log("You are dead");
         }
 
         RaycastForDoor();
-        
+
     }
     private void FixedUpdate()
     {
         _playerMoveInput = GetMoveInput();
         _playerCenterPoint = MyRb.position + _capsuleCollider.center;
         _playerMoveInput = PlayerStairs();
-        _playerMoveInput = PlayerSlope();
+        //  _playerMoveInput = PlayerSlope();
         _playerIsGrounded = PlayerGroundCheck();
         _playerMoveInput.y = PlayerFallGravity();
 
@@ -156,16 +159,16 @@ public class PlayerController : MonoBehaviour
         {
             _ascendingStairsMovementMultiplier = 300.0f;
         }
-        
-        
-        
-        
+
+
+
+
 
         Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);
 
         MyRb.AddRelativeForce(_playerMoveInput, ForceMode.Force);
-       
-        
+
+
         if (!isTank)
         {
             ModernControllerFixedUpdate();
@@ -181,6 +184,16 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
+
+    public void SetDoorTransform(Transform Door)
+    {
+        doorTransform = Door;
+    }
+    public Transform GetDoorTransform()
+    {
+        return doorTransform;
+    }
     private bool PlayerGroundCheck()
     {
         float sphereCastRadius = _capsuleCollider.radius * _groundCheckRadiusMultiplier;
@@ -202,7 +215,7 @@ public class PlayerController : MonoBehaviour
                  x <= _numberOfStepDetectRays;
                  x++, ray += _rayIncrementAmount)
             {
-                Vector3 rayLower = new Vector3(_playerCenterPoint.x, ((_playerCenterPoint.y - _playerHalfHeightToGround) + ray), _playerCenterPoint.z); 
+                Vector3 rayLower = new Vector3(_playerCenterPoint.x, ((_playerCenterPoint.y - _playerHalfHeightToGround) + ray), _playerCenterPoint.z);
                 RaycastHit hitLower;
                 if (Physics.Raycast(rayLower, MyRb.transform.TransformDirection(_playerMoveInput), out hitLower, calculatedVelDistance + _maxAscendRayDistance))
                 {
@@ -213,7 +226,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-          //  Debug.Log(raysThatHit.Count);
+            //  Debug.Log(raysThatHit.Count);
             if (raysThatHit.Count > 0)
             {
                 Vector3 rayUpper = new Vector3(_playerCenterPoint.x, (((_playerCenterPoint.y - _playerHalfHeightToGround) + _maxStepHeight) + _rayIncrementAmount), _playerCenterPoint.z);
@@ -249,28 +262,28 @@ public class PlayerController : MonoBehaviour
                             calculatedStepInput = Quaternion.AngleAxis(tanAngle, playerRelX) * calculatedStepInput;
                             calculatedStepInput *= _ascendingStairsMovementMultiplier;
                         }
-                        
+
                     }
                     else
-                    {   
+                    {
                         _playerIsAscendingStairs = false;
                         _isFirstStep = true;
                     }
                 }
                 else
-                {   
+                {
                     _playerIsAscendingStairs = false;
                     _isFirstStep = true;
                 }
             }
             else
-            {   
+            {
                 _playerIsAscendingStairs = false;
                 _isFirstStep = true;
             }
         }
         else
-        {   
+        {
             _playerIsAscendingStairs = false;
             _isFirstStep = true;
         }
@@ -308,7 +321,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (!(_playerIsGrounded) && hitUpper.distance < _capsuleCollider.radius + (_maxDescendRayDistance * 2.0f))
                     {
-                        Debug.DrawRay(rayUpper,MyRb.transform.TransformDirection(-_playerMoveInput), Color.yellow, 5.0f);
+                        Debug.DrawRay(rayUpper, MyRb.transform.TransformDirection(-_playerMoveInput), Color.yellow, 5.0f);
 
                         _playerIsDescendingStairs = true;
                         Vector3 playerRelX = Vector3.Cross(_playerMoveInput, Vector3.up);
@@ -327,22 +340,22 @@ public class PlayerController : MonoBehaviour
                         calculatedStepInput *= _descendingStairsMovementMultiplier;
                     }
                     else
-                    {   
+                    {
                         _playerIsDescendingStairs = false;
                     }
                 }
                 else
-                {   
+                {
                     _playerIsDescendingStairs = false;
                 }
             }
             else
-            {   
+            {
                 _playerIsDescendingStairs = false;
             }
         }
         else
-        {   
+        {
             _playerIsDescendingStairs = false;
         }
         return calculatedStepInput;
@@ -366,11 +379,11 @@ public class PlayerController : MonoBehaviour
         return calculatedStepInput;
 
     }
-     
+
     private float PlayerFallGravity()
     {
         float gravity = _playerMoveInput.y;
-        if(_playerIsGrounded || _playerIsAscendingStairs || _playerIsDescendingStairs)
+        if (_playerIsGrounded || _playerIsAscendingStairs || _playerIsDescendingStairs)
         {
             _gravityFallCurrent = _gravityFallMin; // Reset
         }
@@ -465,8 +478,8 @@ public class PlayerController : MonoBehaviour
         {
 
 
-            
-            
+
+
 
 
             if (Input.GetButton("Run"))
@@ -505,11 +518,11 @@ public class PlayerController : MonoBehaviour
                     isBacking = false;
                     if (!isRunning)
                     {
-                        verticalSpeed = 300f;
+                        verticalSpeed = 800f;
                     }
                     else
                     {
-                        verticalSpeed = 500f;
+                        verticalSpeed = 2000f;
                     }
                 }
                 verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
@@ -541,83 +554,83 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(1.18f);
                 canStopAnim = false;
             }
-            
+
         }
 
-        
+
     }
-      
+
     private void MovementAnimationTank()
+    {
+
+        bool forwardPressed = Input.GetKey("w");
+        bool rightPressed = Input.GetKey("d");
+        bool leftpressed = Input.GetKey("a");
+        bool runPressed = Input.GetKey("left shift");
+
+
+
+        if (forwardPressed && velocityY < 2.0f)
         {
-
-            bool forwardPressed = Input.GetKey("w");
-            bool rightPressed = Input.GetKey("d");
-            bool leftpressed = Input.GetKey("a");
-            bool runPressed = Input.GetKey("left shift");
- 
-
-
-            if (forwardPressed && velocityY < 2.0f)
-            {
-                velocityY += Time.deltaTime * BlendTreeAcceleration;
-            }
-            if (forwardPressed && runPressed && velocityY < 3.0f)
-            {
-                velocityY += Time.deltaTime * BlendTreeAcceleration;
-            }
-            if (forwardPressed && !isRunning && velocityY > 2.0f)
-            {
-                velocityY -= Time.deltaTime * BlendTreeDeceleration;
-            }
-            if (!forwardPressed && velocityY > 1.0f)
-            {
-                velocityY -= Time.deltaTime * BlendTreeDeceleration;
-            }
-            if (!forwardPressed && !isBacking && velocityY < 1.0f)
-            {
-                velocityY += Time.deltaTime * BlendTreeAcceleration;
-            }
-            if (isBacking && velocityY > 0.0f)
-            {
-                velocityY -= Time.deltaTime * BlendTreeDeceleration;
-            }
+            velocityY += Time.deltaTime * BlendTreeAcceleration;
+        }
+        if (forwardPressed && runPressed && velocityY < 3.0f)
+        {
+            velocityY += Time.deltaTime * BlendTreeAcceleration;
+        }
+        if (forwardPressed && !isRunning && velocityY > 2.0f)
+        {
+            velocityY -= Time.deltaTime * BlendTreeDeceleration;
+        }
+        if (!forwardPressed && velocityY > 1.0f)
+        {
+            velocityY -= Time.deltaTime * BlendTreeDeceleration;
+        }
+        if (!forwardPressed && !isBacking && velocityY < 1.0f)
+        {
+            velocityY += Time.deltaTime * BlendTreeAcceleration;
+        }
+        if (isBacking && velocityY > 0.0f)
+        {
+            velocityY -= Time.deltaTime * BlendTreeDeceleration;
+        }
 
 
 
-            if (rightPressed && !leftpressed && !forwardPressed && !isBacking && velocityX < 1.0f)
-            {
-                velocityX += Time.deltaTime * BlendTreeAcceleration;
-            }
-            if (!rightPressed && leftpressed && !forwardPressed && velocityX > -1.0f)
-            {
-                velocityX -= Time.deltaTime * BlendTreeDeceleration;
-            }
-            if (!rightPressed && !leftpressed && velocityX < 0.0f)
-            {
-                velocityX += Time.deltaTime * BlendTreeAcceleration;
-            }
-            if (!rightPressed && !leftpressed && velocityX > 0.0f)
-            {
-                velocityX -= Time.deltaTime * BlendTreeDeceleration;
-            }
-            if (!canMove && velocityX != 0.0f)
-            {
-                velocityX = 0.0f;
-                
-            }
-            if(!canMove && velocityY != 0.0f)
-            {
+        if (rightPressed && !leftpressed && !forwardPressed && !isBacking && velocityX < 1.0f)
+        {
+            velocityX += Time.deltaTime * BlendTreeAcceleration;
+        }
+        if (!rightPressed && leftpressed && !forwardPressed && velocityX > -1.0f)
+        {
+            velocityX -= Time.deltaTime * BlendTreeDeceleration;
+        }
+        if (!rightPressed && !leftpressed && velocityX < 0.0f)
+        {
+            velocityX += Time.deltaTime * BlendTreeAcceleration;
+        }
+        if (!rightPressed && !leftpressed && velocityX > 0.0f)
+        {
+            velocityX -= Time.deltaTime * BlendTreeDeceleration;
+        }
+        if (!canMove && velocityX != 0.0f)
+        {
+            velocityX = 0.0f;
+
+        }
+        if (!canMove && velocityY != 0.0f)
+        {
             velocityY = 1.0f;
-            }
+        }
 
-        
-        
+
+
         {
 
         }
 
-        }
-   
+    }
+
     private void ModernControllerUpdate()
     {
         if (canMove)
@@ -662,7 +675,7 @@ public class PlayerController : MonoBehaviour
             MyRb.velocity = v1;
         }
     }
-       
+
     private void ModernControllerFixedUpdate()
     {
         moveDirection = verticalMove * viewForwardModern + horizontalMove * viewRight;
@@ -674,8 +687,8 @@ public class PlayerController : MonoBehaviour
         {
             base.transform.forward = moveDirection;
         }
-    }   
-    
+    }
+
     private void MovementAnimationModernController()
     {
         bool forwardPressed = Input.GetKey("w");
@@ -711,40 +724,23 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.5f, Color.green);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
         {
-            
+
             canOpenDoor = true;
+    
+            SetDoorTransform(hitinfo.collider.transform);
             Debug.Log("DoorAhead");
+
         }
         else
         {
             canOpenDoor = false;
         }
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.0f, itemLayer))
-        {
-            canGrab = true;
-            Debug.Log("Item");
-
-            if (hitinfo.collider.tag == "Key")
-            {
-                
-            }
-            
-        }
-        else
-        {
-            canGrab = false;
-        }
-
-        
-
-        
     }
-    
+
     private Vector3 GetMoveInput()
     {
         return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
     }
 
-   
+
 }
