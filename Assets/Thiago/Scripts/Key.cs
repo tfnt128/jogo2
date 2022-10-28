@@ -8,6 +8,8 @@ public class Key : MonoBehaviour
     private PlayerController player;
     public DoorsWithLock door;
     public GameObject Particle;
+    public bool canGrab;
+    public bool canDestroy;
 
 
 
@@ -25,11 +27,11 @@ public class Key : MonoBehaviour
     }
     private void pickKey()
     {
-        if (player.canGrab && Input.GetKeyDown(KeyCode.E))
+        if (canGrab && Input.GetKeyDown(KeyCode.E))
         {
 
             door.hasKey = true;
-            player.canGrab = false;
+            canDestroy = true ;
             // FadeInFadeOut();
 
         }
@@ -39,6 +41,7 @@ public class Key : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            
             player.canGrab = true;
         }
 

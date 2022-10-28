@@ -12,6 +12,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+
     public bool canMove = true;
     public RaycastHit hitinfo;
     public bool canOpenDoor = false;
@@ -104,7 +105,6 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
         MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
@@ -727,7 +727,7 @@ public class PlayerController : MonoBehaviour
 
             canOpenDoor = true;
     
-            SetDoorTransform(hitinfo.collider.transform);
+           
             Debug.Log("DoorAhead");
 
         }
@@ -743,4 +743,26 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void OnTriggerStay(Collider other)
+    {
+       // int l = other.gameObject.layer;
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("KEY HERE");
+            other.GetComponent<Key>().canGrab = true;
+            if (other.GetComponent<Key>().canDestroy)
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("KEY OUT");
+            other.GetComponent<Key>().canGrab = false;
+        }
+    }
 }
