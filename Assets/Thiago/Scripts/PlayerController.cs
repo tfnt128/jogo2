@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public int life = 100;
     public Collider Stairs;
     public PhysicMaterial StairsMaterial;
+    private FadeInAndOut fadeInAndOut;
 
     Transform doorTransform;
 
@@ -105,9 +106,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
+        fadeInAndOut = GameObject.Find("FadeInAndOutManager").GetComponent<FadeInAndOut>();
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
         MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        
     }
 
     private void Update()
@@ -745,14 +748,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-       // int l = other.gameObject.layer;
         if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
             Debug.Log("KEY HERE");
             other.GetComponent<Key>().canGrab = true;
             if (other.GetComponent<Key>().canDestroy)
             {
-                Destroy(other.gameObject);
+                other.GetComponent<Key>().canDestroy = false;
+                StartCoroutine(StartAnimation(other));
+               
             }
         }
         
@@ -765,4 +769,28 @@ public class PlayerController : MonoBehaviour
             other.GetComponent<Key>().canGrab = false;
         }
     }
+    IEnumerator PickUpItem(Collider other)
+    {
+        
+        yield return new WaitForSeconds(2.5f);
+      //  fadeInAndOut.act = false;
+        if (other != null)
+        {
+            Destroy(other.gameObject);
+        }
+      
+        canMove = true;
+    }
+    IEnumerator StartAnimation(Collider other)
+    {
+        canMove = false;
+        anim.SetTrigger("PickItem");
+        yield return new WaitForSeconds(0.5f);
+        anim.speed = 0;
+        fadeInAndOut.act = true;
+        StartCoroutine(PickUpItem(other));
+        
+
+    }
+
 }

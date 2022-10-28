@@ -13,17 +13,17 @@ public class Key : MonoBehaviour
 
 
 
+
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        // door = GameObject.FindGameObjectWithTag("DoorsWithLock").get;
+
     }
 
 
     private void Update()
     {
         pickKey();
-
     }
     private void pickKey()
     {
@@ -32,8 +32,7 @@ public class Key : MonoBehaviour
 
             door.hasKey = true;
             canDestroy = true ;
-            // FadeInFadeOut();
-
+            
         }
 
     }
@@ -53,19 +52,5 @@ public class Key : MonoBehaviour
             player.canGrab = false;
         }
     }
-    IEnumerator FadeInFadeOut()
-    {
-        player.canMove = false;
-        door.fadeOut.SetActive(true);
-        door.fadeIn.SetActive(false);
-        yield return new WaitForSeconds(2.5f);
 
-
-
-        Destroy(gameObject);
-        Destroy(Particle);
-        door.fadeOut.SetActive(false);
-        door.fadeIn.SetActive(true);
-        player.canMove = true;
-    }
 }
