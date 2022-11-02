@@ -15,16 +15,14 @@ public class DoorsWithLock : MonoBehaviour
 
     private void Start()
     {
-
-
         fadeOut.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (locked)
         {
-            hasKey = true;
+            unlocked = false;
         }
         openDoor();
 
@@ -32,47 +30,40 @@ public class DoorsWithLock : MonoBehaviour
     private void openDoor()
     {
 
-        Transform door = player.GetDoorTransform();
-        Debug.Log(door.name);
-
-        if (locked)
-        {
-            unlocked = false;
-        }
         if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E))
         {
-
-            if (unlocked)
-            {
-                player.canMove = false;
-                StartCoroutine(changeRoom(door));
-            }
-
-
-            else if (hasKey)
-            {
-                locked = false;
-                unlocked = true;
-                Debug.Log("Door Unlocked");
-            }
-            else if (!unlocked)
+            if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked)
             {
                 Debug.Log("Locked");
             }
+            else
+            {
+                player.canMove = false;
+                StartCoroutine(changeRoom());
+            }                      
         }
 
-
+        if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.Z) && player.hitinfo.collider.GetComponent<DoorsWithLock>().locked)
+        {
+            if (player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
+            {
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().locked = false;
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked = true;
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey = false;
+                Debug.Log("Door Unlocked");
+            }           
+        }       
     }
 
-    IEnumerator changeRoom(Transform door)
+    IEnumerator changeRoom()
     {
+        
         fadeOut.SetActive(true);
         fadeIn.SetActive(false);
         yield return new WaitForSeconds(2.5f);
 
-        player.transform.position = door.transform.GetChild(0).position;
-
-        player.transform.rotation = door.GetComponent<DoorsWithLock>().transform.rotation;
+        player.transform.position = player.hitinfo.collider.gameObject.transform.GetChild(0).position;
+        player.transform.rotation = player.hitinfo.collider.gameObject.transform.rotation;
         fadeOut.SetActive(false);
         fadeIn.SetActive(true);
         player.canMove = true;

@@ -12,12 +12,14 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
+
     public bool canMove = true;
     public RaycastHit hitinfo;
     public bool canOpenDoor = false;
     public int life = 100;
     public Collider Stairs;
     public PhysicMaterial StairsMaterial;
+    private FadeInAndOut fadeInAndOut;
 
     Transform doorTransform;
 
@@ -104,10 +106,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-
+        fadeInAndOut = GameObject.Find("FadeInAndOutManager").GetComponent<FadeInAndOut>();
         currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera");
         MyRb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        
     }
 
     private void Update()
@@ -727,7 +730,7 @@ public class PlayerController : MonoBehaviour
 
             canOpenDoor = true;
     
-            SetDoorTransform(hitinfo.collider.transform);
+           
             Debug.Log("DoorAhead");
 
         }
@@ -742,5 +745,52 @@ public class PlayerController : MonoBehaviour
         return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
     }
 
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("KEY HERE");
+            other.GetComponent<Key>().canGrab = true;
+            if (other.GetComponent<Key>().canDestroy)
+            {
+                other.GetComponent<Key>().canDestroy = false;
+                StartCoroutine(StartAnimation(other));
+               
+            }
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("KEY OUT");
+            other.GetComponent<Key>().canGrab = false;
+        }
+    }
+    IEnumerator PickUpItem(Collider other)
+    {
+        
+        yield return new WaitForSeconds(2.5f);
+      //  fadeInAndOut.act = false;
+        if (other != null)
+        {
+            Destroy(other.gameObject);
+        }
+      
+        canMove = true;
+    }
+    IEnumerator StartAnimation(Collider other)
+    {
+        canMove = false;
+        anim.SetTrigger("PickItem");
+        yield return new WaitForSeconds(0.5f);
+        anim.speed = 0;
+        fadeInAndOut.act = true;
+        StartCoroutine(PickUpItem(other));
+        
+
+    }
 
 }
