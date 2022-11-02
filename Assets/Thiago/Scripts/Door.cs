@@ -15,8 +15,8 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        
-        
+
+
         fadeOut.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
@@ -36,11 +36,6 @@ public class Door : MonoBehaviour
 
 
         }
-
-       
-            
-
-        
     }
 
     IEnumerator changeRoom(Transform door)
@@ -48,9 +43,9 @@ public class Door : MonoBehaviour
         fadeOut.SetActive(true);
         fadeIn.SetActive(false);
         yield return new WaitForSeconds(2.5f);
-       
+
         player.transform.position = door.transform.GetChild(0).position;
-       
+
         fadeOut.SetActive(false);
         fadeIn.SetActive(true);
         player.canMove = true;

@@ -31,7 +31,9 @@ public class DoorsWithLock : MonoBehaviour
     }
     private void openDoor()
     {
-        Transform door = player.hitinfo.collider.gameObject.transform;
+
+        Transform door = player.GetDoorTransform();
+        Debug.Log(door.name);
 
         if (locked)
         {
@@ -39,24 +41,27 @@ public class DoorsWithLock : MonoBehaviour
         }
         if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E))
         {
+
             if (unlocked)
             {
                 player.canMove = false;
                 StartCoroutine(changeRoom(door));
             }
+
+
             else if (hasKey)
             {
                 locked = false;
                 unlocked = true;
                 Debug.Log("Door Unlocked");
             }
-            else if(!unlocked)
+            else if (!unlocked)
             {
                 Debug.Log("Locked");
             }
-        }        
+        }
 
-        
+
     }
 
     IEnumerator changeRoom(Transform door)
@@ -67,6 +72,7 @@ public class DoorsWithLock : MonoBehaviour
 
         player.transform.position = door.transform.GetChild(0).position;
 
+        player.transform.rotation = door.GetComponent<DoorsWithLock>().transform.rotation;
         fadeOut.SetActive(false);
         fadeIn.SetActive(true);
         player.canMove = true;
