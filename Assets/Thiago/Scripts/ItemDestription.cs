@@ -4,11 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Video;
 
 public class ItemDestription : MonoBehaviour
 {
     public TextMeshProUGUI textOB;
     public string description = "Description";
+    public VideoPlayer videoPlayer;
 
     public bool inReach;
     public bool pressed;
@@ -55,12 +57,14 @@ public class ItemDestription : MonoBehaviour
             }
                 
             Time.timeScale = 0;
+            videoPlayer.Pause();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 pressed = false;
                 textOB.enabled = false;
                 textOB.text = "";
                 Time.timeScale = 1;
+                videoPlayer.Play();
                 isDoor = false;
                 this.GetComponent<ItemDestription>().enabled = false;
             }
@@ -72,6 +76,7 @@ public class ItemDestription : MonoBehaviour
                 pressed = true;                
                 textOB.text = description.ToString();
                 Time.timeScale = 0;
+                videoPlayer.Pause();
             }
             else
             {
@@ -79,6 +84,7 @@ public class ItemDestription : MonoBehaviour
                 textOB.enabled = false;
                 textOB.text = "";
                 Time.timeScale = 1;
+                videoPlayer.Play();
             }                        
         }
     }

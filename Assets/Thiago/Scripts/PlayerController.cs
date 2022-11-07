@@ -135,10 +135,10 @@ public class PlayerController : MonoBehaviour
     {
         _playerMoveInput = GetMoveInput();
         _playerCenterPoint = MyRb.position + _capsuleCollider.center;
-        _playerMoveInput = PlayerStairs();
-        //  _playerMoveInput = PlayerSlope();
+       // _playerMoveInput = PlayerStairs();
+       // _playerMoveInput = PlayerSlope();
         _playerIsGrounded = PlayerGroundCheck();
-        _playerMoveInput.y = PlayerFallGravity();
+      //  _playerMoveInput.y = PlayerFallGravity();
 
 
         if (!isMoving)
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _ascendingStairsMovementMultiplier = 300.0f;
+            _ascendingStairsMovementMultiplier = 3500.0f;
         }
 
 
@@ -513,7 +513,7 @@ public class PlayerController : MonoBehaviour
                 isMoving = true;
                 if (Input.GetButton("SKey"))
                 {
-                    verticalSpeed = 120f;
+                    verticalSpeed = 100f;
                     isBacking = true;
                 }
                 else
@@ -521,11 +521,11 @@ public class PlayerController : MonoBehaviour
                     isBacking = false;
                     if (!isRunning)
                     {
-                        verticalSpeed = 800f;
+                        verticalSpeed = 250f;
                     }
                     else
                     {
-                        verticalSpeed = 2000f;
+                        verticalSpeed = 600f;
                     }
                 }
                 verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
