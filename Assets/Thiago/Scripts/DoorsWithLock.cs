@@ -10,13 +10,14 @@ public class DoorsWithLock : MonoBehaviour
     public bool hasKey = false;
     public bool locked = true;
     public bool unlocked = false;
-
-
+    public bool showUnlockedMsg;
+    public ItemDestription destription;
 
     private void Start()
     {
         fadeOut.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        destription = GetComponent<ItemDestription>();
     }
     private void Update()
     {
@@ -34,7 +35,16 @@ public class DoorsWithLock : MonoBehaviour
         {
             if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked)
             {
-                Debug.Log("Locked");
+
+                if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
+                {
+                    Debug.Log("Locked");
+                    destription.inReach = true;
+                    destription.enabled = true;
+                    destription.isDoor = true;
+                }
+                
+                
             }
             else
             {
@@ -43,15 +53,24 @@ public class DoorsWithLock : MonoBehaviour
             }                      
         }
 
-        if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.Z) && player.hitinfo.collider.GetComponent<DoorsWithLock>().locked)
+        if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E) && player.hitinfo.collider.GetComponent<DoorsWithLock>().locked)
         {
             if (player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
             {
+                destription.inReach = true;
+                destription.enabled = true;
+                destription.isDoor = true;
+                showUnlockedMsg = true;
                 player.hitinfo.collider.GetComponent<DoorsWithLock>().locked = false;
                 player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked = true;
                 player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey = false;
+                
                 Debug.Log("Door Unlocked");
-            }           
+            }
+            else
+            {
+                showUnlockedMsg = false;
+            }
         }       
     }
 
