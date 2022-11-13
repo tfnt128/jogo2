@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: aca07fde242cdb940be17a7e6862741a
+guid: c9eb5156de001bc4985574492a734e9b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Picking Up (1)
-  - first:
-      74: -3007649821139622020
-    second: Picking Up
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -22,8 +19,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Copied Avatar Rig Configuration mis-match. Transform hierarchy
-      does not match:\n\tTransform 'Hips' for human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -40,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Picking Up
+      name: mixamo.com
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 72
+      lastFrame: 287
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
