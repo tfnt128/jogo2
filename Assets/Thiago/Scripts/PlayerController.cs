@@ -725,7 +725,8 @@ public class PlayerController : MonoBehaviour
     private void RaycastForDoor()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.5f, Color.green);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
         {
 
             canOpenDoor = true;
@@ -772,7 +773,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PickUpItem(Collider other)
     {
         
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
       //  fadeInAndOut.act = false;
         if (other != null)
         {
@@ -785,12 +786,9 @@ public class PlayerController : MonoBehaviour
     {
         canMove = false;
         anim.SetTrigger("PickItem");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.2f);
         anim.speed = 0;
         fadeInAndOut.act = true;
-        StartCoroutine(PickUpItem(other));
-        
-
+        StartCoroutine(PickUpItem(other));       
     }
-
 }

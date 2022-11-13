@@ -12,9 +12,12 @@ public class DoorsWithLock : MonoBehaviour
     public bool unlocked = false;
     public bool showUnlockedMsg;
     public ItemDestription destription;
+    public bool playerIn;
+
 
     private void Start()
     {
+        playerIn = true;
         fadeOut.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         destription = GetComponent<ItemDestription>();
@@ -81,8 +84,18 @@ public class DoorsWithLock : MonoBehaviour
         fadeIn.SetActive(false);
         yield return new WaitForSeconds(2.5f);
 
-        player.transform.position = player.hitinfo.collider.gameObject.transform.GetChild(0).position;
-        player.transform.rotation = player.hitinfo.collider.gameObject.transform.rotation;
+        if (player.hitinfo.collider.GetComponent<DoorsWithLock>().playerIn)
+        {
+            player.transform.position = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).position;
+            player.transform.rotation = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).rotation;
+        }
+        else
+        {
+            player.transform.position = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).position;
+            player.transform.rotation = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).rotation;
+        }
+        
+        
         fadeOut.SetActive(false);
         fadeIn.SetActive(true);
         player.canMove = true;

@@ -12,6 +12,7 @@ public class KeyPad : MonoBehaviour
     private PlayerController player;
     bool isClose;
     bool isOpen;
+    public KeypadController keypad;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,34 @@ public class KeyPad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (keypad.corrertPass)
+        {
+            isOpen = false;
+            player.canMove = true;
+            if (GameObject.FindGameObjectWithTag("CurrentCamera") != null)
+            {
+                if (GameObject.FindGameObjectWithTag("CurrentCamera").GetComponent<CinemachineVirtualCamera>() != null)
+                {
+                    currentCamera = GameObject.FindGameObjectWithTag("CurrentCamera").GetComponent<CinemachineVirtualCamera>();
+                }
+            }
+            else
+            {
+                currentCamera = null;
+            }
+
+            if (currentCamera != targetCameraOut || currentCamera == null)
+            {
+                targetCameraOut.tag = "CurrentCamera";
+                targetCameraOut.Priority = 100;
+
+                currentCamera.tag = "InactiveCamera";
+                currentCamera.Priority = 99;
+            }
+            Destroy(GetComponent<Collider>());
+            Destroy(targetCameraIn);
+        }
+
         if(Input.GetKeyDown(KeyCode.E) && isClose)
         {
             if (isOpen)
