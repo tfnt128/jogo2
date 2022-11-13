@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance = null;
     public GameObject inventory;
     AudioSource audioSource;
     [SerializeField] AudioClip pickUpClip;
     [SerializeField] AudioClip pickDownClip;
     [SerializeField] AudioClip pickBothClip;
+    [SerializeField] GameObject key;
 
     public Transform inventorySlotHolder;
 
@@ -19,6 +21,18 @@ public class InventoryManager : MonoBehaviour
 
     public int currentSlot;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -28,6 +42,10 @@ public class InventoryManager : MonoBehaviour
     }
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            AddItem(key, 1);
+        }
         if (inventory.activeSelf == true)
         {
             cursor.position = Input.mousePosition + offset;
@@ -77,13 +95,13 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    void AddItem(GameObject item, int amount)
+    public void AddItem(GameObject item, int amount)
     {
         for (int i = 0; i < amount; i++)
         {
             for (int x = 0; x < slots.Count; x++)
             {
-                if (isFull[i] == false)
+                if (isFull[x] == false)
                 {
                     Instantiate(item, slots[x]);
                     CheckSlots();
@@ -96,11 +114,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         Debug.Log("No inventory space.");
-    }
-
-    public void DragStart()
-    {
-
     }
 
     public void PickupDropInventory()

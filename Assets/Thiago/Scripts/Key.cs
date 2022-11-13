@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Key : MonoBehaviour
 {
@@ -11,16 +10,10 @@ public class Key : MonoBehaviour
     public bool canGrab;
     public bool canDestroy;
 
-
-
-
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-
     }
-
-
     private void Update()
     {
         pickKey();
@@ -29,21 +22,16 @@ public class Key : MonoBehaviour
     {
         if (canGrab && Input.GetKeyDown(KeyCode.E))
         {
-
             door.hasKey = true;
-            canDestroy = true ;
-            
+            canDestroy = true;
         }
-
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
         {
-            
             player.canGrab = true;
         }
-
     }
     private void OnTriggerExit(Collider other)
     {
@@ -52,5 +40,4 @@ public class Key : MonoBehaviour
             player.canGrab = false;
         }
     }
-
 }
