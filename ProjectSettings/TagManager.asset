@@ -13,6 +13,9 @@ TagManager:
   - FadeIn
   - FadeOut
   - InterationTrigger
+  - tv
+  - InDoor
+  - OutDoor
   layers:
   - Default
   - TransparentFX
