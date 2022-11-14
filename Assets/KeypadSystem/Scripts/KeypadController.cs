@@ -52,8 +52,8 @@ public class KeypadController : MonoBehaviour
     {
         if (passwordText.text == password)
         {
-            //door.locked = false;
-           // door.unlocked = true;
+            door.locked = false;
+            door.unlocked = true;
 
             if (audioSource != null)
                 audioSource.PlayOneShot(correctSound);
@@ -74,14 +74,16 @@ public class KeypadController : MonoBehaviour
     IEnumerator waitAndClear()
     {
         yield return new WaitForSeconds(0.75f);
+        if (passwordText.text == password)
+        {
+            StartCoroutine(waitAndClear2());
+        }
         Clear();
-        StartCoroutine(waitAndClear2());
     }
     IEnumerator waitAndClear2()
     {
         yield return new WaitForSeconds(0.35f);
         corrertPass = true;
+        
     }
-
-
 }

@@ -48,6 +48,7 @@ public class KeyPad : MonoBehaviour
             }
             Destroy(GetComponent<Collider>());
             Destroy(targetCameraIn);
+            keypad.corrertPass = false;
         }
 
         if(Input.GetKeyDown(KeyCode.E) && isClose)
