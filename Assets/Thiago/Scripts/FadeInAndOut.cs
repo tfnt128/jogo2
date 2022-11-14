@@ -26,10 +26,12 @@ public class FadeInAndOut : MonoBehaviour
     {
         FadeOut.SetActive(true);
         FadeIn.SetActive(false);
-        yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadSceneAsync("InventoryScene", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
+        yield return new WaitForSeconds(1f);
         InventoryManager.Instance.AddItem(key, 1);
-        SceneManager.UnloadSceneAsync("InventoryScene");
+        yield return new WaitForSeconds(1f);
+        SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
         FadeOut.SetActive(false);
         FadeIn.SetActive(true);
     }

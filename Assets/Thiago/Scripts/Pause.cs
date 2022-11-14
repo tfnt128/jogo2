@@ -22,8 +22,7 @@ public class Pause : MonoBehaviour
                 isPaused = true;
                 audio.Pause();
                 pauseScreen.SetActive(true);
-                SceneManager.LoadSceneAsync("InventoryScene", LoadSceneMode.Additive);
-                GameObject.Find("InventoryCanvas").SetActive(false);
+                SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
                 //videoPlayer.Pause();               
             }
             else
