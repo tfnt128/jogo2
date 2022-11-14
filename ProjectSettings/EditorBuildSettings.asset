@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Alan/EndingScene/EndScene.unity
     guid: 245b80c683e8c2141992b09bb27f75b8
+  - enabled: 1
+    path: Assets/Fred/InventoryScene.unity
+    guid: d5d852eaf4c4de649b9398b736e43442
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ca32edfaf1ec47d43a4e12806929b6e3,
       type: 2}

@@ -2,6 +2,7 @@ using ClipperLib;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
 public class Pause : MonoBehaviour
@@ -21,15 +22,18 @@ public class Pause : MonoBehaviour
                 isPaused = true;
                 audio.Pause();
                 pauseScreen.SetActive(true);
-                videoPlayer.Pause();               
+                SceneManager.LoadSceneAsync("InventoryScene", LoadSceneMode.Additive);
+                GameObject.Find("InventoryCanvas").SetActive(false);
+                //videoPlayer.Pause();               
             }
             else
             {
+                SceneManager.UnloadSceneAsync("InventoryScene");
                 pauseScreen.SetActive(false);
                 audio.UnPause();
                 isPaused = false;
                 Time.timeScale = 1;
-                videoPlayer.Play();
+                //videoPlayer.Play();
             }
         }        
     }
