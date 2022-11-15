@@ -1,0 +1,366 @@
+fileFormatVersion: 2
+guid: 7624dcdec8e98aa46b88b8643f70d62a
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armoir_bodyMat
+    second: {fileID: 2100000, guid: 6042df9ce05aae34cb8a49d56ea42fa6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armoire_doors_tiroires_dawnsMat
+    second: {fileID: 2100000, guid: 66a20224f7fffc647bdef8e4647479df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bois_charbonMat
+    second: {fileID: 2100000, guid: aef0aa152cda0814da28fb372df3d127, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: armoire_doors_upMat
+    second: {fileID: 2100000, guid: 3b703d95698526947b1f8c660dc4c788, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: armoire_pates_planches_boisMat
+    second: {fileID: 2100000, guid: c4ba0edb411423c45a098df70e300bf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_003Mat
+    second: {fileID: 2100000, guid: 532001599dfc95449b88bd08ebd9264b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_004Mat
+    second: {fileID: 2100000, guid: 8708bff3c96225a478278c81b65530ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_005Mat
+    second: {fileID: 2100000, guid: b7648654b835b7447a952b62ace00dd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_006Mat
+    second: {fileID: 2100000, guid: 33cb8dce1b2c7e648bbc4022566d832e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_007Mat
+    second: {fileID: 2100000, guid: d7e524b71657d7e4690c85bd4c3aedfc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_008Mat
+    second: {fileID: 2100000, guid: 7959dc66aeb248248915615e9ae83451, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_009Mat
+    second: {fileID: 2100000, guid: 487a1fc38a3956d4d9973821b132e826, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_010Mat
+    second: {fileID: 2100000, guid: f2ef940f77447a74c949c7b0f279205b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_011Mat
+    second: {fileID: 2100000, guid: 53e0b23c6cc77e2468d61399972919e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_012Mat
+    second: {fileID: 2100000, guid: 52e18fd4d2321dd439122e9641656bea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_013Mat
+    second: {fileID: 2100000, guid: 1655c81dec1b0af4f9f197a733e72618, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_014Mat
+    second: {fileID: 2100000, guid: c6e0f71a9f1c7934daec6c25e7b3eeed, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_015Mat
+    second: {fileID: 2100000, guid: 17ce2fa95184fea408a6eacc708935f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_016Mat
+    second: {fileID: 2100000, guid: bf351d2f6999e1944bf39301e6cd47e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_017Mat
+    second: {fileID: 2100000, guid: 59720c0c23d9c6c4990b982ee77fee4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_018Mat
+    second: {fileID: 2100000, guid: 01ccdfec8b833184a8ba523e669b554e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_019Mat
+    second: {fileID: 2100000, guid: 0d4462317139ebd49ade3acbf84503b3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_020Mat
+    second: {fileID: 2100000, guid: 55090d0e1afa00a48adba1231dfefcab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_021Mat
+    second: {fileID: 2100000, guid: aa476ef0beb7d3a419d956bbebd212d5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_022Mat
+    second: {fileID: 2100000, guid: f25221f5de490464fb423ee355a49631, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: asiette_2Mat
+    second: {fileID: 2100000, guid: 035ca708e92a42841a4edc2d56233b66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bottles_lamp_warmoireLittleMat
+    second: {fileID: 2100000, guid: 734859f6238b08c4ead6a056c5607252, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cafetiere_book_lavemainMat
+    second: {fileID: 2100000, guid: 5fbb95106eec0724795ac2ae1dd0f86e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: carten__old_soupMat
+    second: {fileID: 2100000, guid: 38063cf7ce7391041bf89c8144da539a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cucharon_separatedMat
+    second: {fileID: 2100000, guid: 4175c777d9f49b943ae9ede08b8bd706, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door_windowMat
+    second: {fileID: 2100000, guid: 7926bfe8f7cd9644894d44277de15549, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e_oven_bodyMat
+    second: {fileID: 2100000, guid: 1d8f438efa8970249aa97a687faeb048, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e_oven_door_supportMat
+    second: {fileID: 2100000, guid: 7a94953bf072d814d9ed520c5d5a3e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e_oven_doorsMat
+    second: {fileID: 2100000, guid: 3a33e7f77d1e7614780a076dac2c1322, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: espumador__cuchaeron_potaje_wallMat
+    second: {fileID: 2100000, guid: 913d539dbf37a634198bd342abe28e62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_012Mat
+    second: {fileID: 2100000, guid: d2fc4ad3fbb964e448f80e07b26885d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_013Mat
+    second: {fileID: 2100000, guid: 2eadd69fae87729408e8237139225c87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_014Mat
+    second: {fileID: 2100000, guid: d1e09d3089156bf4cb043e910d70f9e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_015Mat
+    second: {fileID: 2100000, guid: e81b9a087b5f79d4cb1492ac53259a23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_016Mat
+    second: {fileID: 2100000, guid: 4e8410c8ed1fe0e408cabc79ab734e43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: platos_2Mat
+    second: {fileID: 2100000, guid: 78871fa1e6dd0d44381cdf0e1f4a1a52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: poiles_crochetsMat
+    second: {fileID: 2100000, guid: 9810b1d4e28a78740a818c486c6d1de5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: table_chaisesMat
+    second: {fileID: 2100000, guid: 84879f8d7dcb856439ba5fd146d62b16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_barreMat
+    second: {fileID: 2100000, guid: 700b11fc755aa254caee348e3698b72e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_doorsMat
+    second: {fileID: 2100000, guid: c6991a69ba809a442a7a14655442c152, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_doors_bordersMat
+    second: {fileID: 2100000, guid: af957ad4b16145948a6cd4c55e100550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_footsMat
+    second: {fileID: 2100000, guid: 07287889e51934b42a7c147429a48f03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_handlesMat
+    second: {fileID: 2100000, guid: 06c42cf01e705f840ab8687dcf09962d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_hule_doorsMat
+    second: {fileID: 2100000, guid: 406fdfcbf8e5a77479d77237f99771b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_oven_insideMat
+    second: {fileID: 2100000, guid: 41b4f3f2701c5ff499d814911d07c1e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: w_wall_w_plataformMat
+    second: {fileID: 2100000, guid: 3a40a85ed129abc49a04e082cf1bfebc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_plafond_plancherMat
+    second: {fileID: 2100000, guid: dd6905a6f0bbe224b8f9a7c25f2db0b8, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
