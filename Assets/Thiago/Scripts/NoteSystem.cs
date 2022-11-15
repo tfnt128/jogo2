@@ -22,10 +22,7 @@ public class NoteSystem : MonoBehaviour
         {
             player.canMove = false;
         }
-        else
-        {
-            player.canMove = true;
-        }
+       
         if (Input.GetKeyDown(KeyCode.E) && isClose)
         {            
             StartCoroutine(FadeInFadeOut());
@@ -48,6 +45,7 @@ public class NoteSystem : MonoBehaviour
             
             FadeOut.SetActive(false);
             FadeIn.SetActive(true);
+            player.canMove = true;
         }
     }
     private void OnTriggerStay(Collider other)

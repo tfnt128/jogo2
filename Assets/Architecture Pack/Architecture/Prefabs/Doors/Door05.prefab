@@ -121,11 +121,10 @@ MonoBehaviour:
   hasKey: 0
   locked: 0
   unlocked: 1
-  showUnlockedMsg: 0
-  destription: {fileID: 6712066626897941828}
   playerIn: 0
-  inn: {fileID: 2409972975016674652}
-  outn: {fileID: 8627877267648811011}
+  dialogue: {fileID: 0}
+  isMessaging: 0
+  canSpawnMsg: 0
 --- !u!114 &6712066626897941828
 MonoBehaviour:
   m_ObjectHideFlags: 0

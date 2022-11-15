@@ -10,20 +10,44 @@ public class DoorsWithLock : MonoBehaviour
     public bool hasKey = false;
     public bool locked = true;
     public bool unlocked = false;
-    public bool showUnlockedMsg;
-    public ItemDestription destription;
     public bool playerIn;
-
+    public DialogueManager dialogue;
+    public bool isMessaging = false;
+    public bool canSpawnMsg = false;
+    public bool canUnlocked = false;
 
     private void Start()
     {
         playerIn = true;
         fadeOut.SetActive(false);
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        destription = GetComponent<ItemDestription>();
     }
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Z) && player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
+        {
+            player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = false;
+            dialogue.textBox.text = "";
+            dialogue.textBox.enabled = false;
+
+            if (player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked)
+            {
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked = false;
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().locked = false;
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked = true;
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey = false;
+                
+            }
+        }
+        if (player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+
         if (locked)
         {
             unlocked = false;
@@ -36,52 +60,57 @@ public class DoorsWithLock : MonoBehaviour
 
         if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E))
         {
+            
             if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked)
             {
+                
+                
 
-                if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
-                {
-                    Debug.Log("Locked");
-                    destription.inReach = true;
-                    destription.enabled = true;
-                    destription.isDoor = true;
-                }
+                    if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
+                    {
+                    player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg = !player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg;
+                    if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging && player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg)
+                    {
+                        dialogue.textBox.enabled = true;
+                        dialogue.PlayDialogue1();
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
+                    }
+
+
+                    }
+                    else if(player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
+                    {
+
+
+                    player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg = !player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg;
+                    if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging && player.hitinfo.collider.GetComponent<DoorsWithLock>().canSpawnMsg)
+                    {
+                        dialogue.textBox.enabled = true;
+                        dialogue.PlayDialogue2();
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked = true;
+                    }                    
+                    }
+                
                 
                 
             }
             else
             {
+                player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked = false;
                 player.canMove = false;
                 StartCoroutine(changeRoom());
             }                      
         }
 
-        if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E) && player.hitinfo.collider.GetComponent<DoorsWithLock>().locked)
-        {
-            if (player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey)
-            {
-                destription.inReach = true;
-                destription.enabled = true;
-                destription.isDoor = true;
-                showUnlockedMsg = true;
-                player.hitinfo.collider.GetComponent<DoorsWithLock>().locked = false;
-                player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked = true;
-                player.hitinfo.collider.GetComponent<DoorsWithLock>().hasKey = false;
-                
-                Debug.Log("Door Unlocked");
-            }
-            else
-            {
-                showUnlockedMsg = false;
-            }
-        }       
+       
     }
 
     IEnumerator changeRoom()
     {
         
         fadeOut.SetActive(true);
-        fadeIn.SetActive(false);
+        fadeIn.SetActive(false);        
         yield return new WaitForSeconds(2.5f);
 
         if (player.hitinfo.collider.GetComponent<DoorsWithLock>().playerIn)
