@@ -12,6 +12,11 @@ public class FadeInAndOut : MonoBehaviour
     public GameObject FadeIn;
     public bool act = false;
     [SerializeField] GameObject key;
+    [SerializeField] GameObject item;
+    [SerializeField] GameObject item2;
+    public bool isKey = false;
+    public bool HasUV;
+    public bool HasTool;
 
     private void Update()
     {
@@ -29,7 +34,16 @@ public class FadeInAndOut : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
         yield return new WaitForSeconds(1f);
-        InventoryManager.Instance.AddItem(key, 1);
+        if (isKey)
+        {
+            InventoryManager.Instance.AddItem(key, 1);
+            isKey = false;
+        }
+        else
+        {
+            InventoryManager.Instance.AddItem(item, 1);
+        }
+        
         yield return new WaitForSeconds(1f);
         SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
         FadeOut.SetActive(false);

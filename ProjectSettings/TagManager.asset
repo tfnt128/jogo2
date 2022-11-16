@@ -16,6 +16,7 @@ TagManager:
   - tv
   - InDoor
   - OutDoor
+  - UV
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Ground
   - Door
   - Item
-  - 
+  - Key
   - 
   - 
   - 

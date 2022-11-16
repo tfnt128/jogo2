@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4221613666027414281}
   - component: {fileID: 2598806289348399054}
   - component: {fileID: 8005956748150212090}
-  - component: {fileID: 6712066626897941828}
   m_Layer: 12
   m_Name: Door05
   m_TagString: Door
@@ -125,24 +124,7 @@ MonoBehaviour:
   dialogue: {fileID: 0}
   isMessaging: 0
   canSpawnMsg: 0
---- !u!114 &6712066626897941828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615254412740317034}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb3b865679f69f840832913fd4e1cec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textOB: {fileID: 0}
-  description: LOCKED
-  videoPlayer: {fileID: 0}
-  inReach: 0
-  pressed: 0
-  isDoor: 0
+  canUnlocked: 0
 --- !u!1 &4170686390208243351
 GameObject:
   m_ObjectHideFlags: 0

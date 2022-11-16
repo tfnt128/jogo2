@@ -749,25 +749,43 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Key"))
         {
             Debug.Log("KEY HERE");
             other.GetComponent<Key>().canGrab = true;
             if (other.GetComponent<Key>().canDestroy)
             {
                 other.GetComponent<Key>().canDestroy = false;
+                fadeInAndOut.isKey = true;
                 StartCoroutine(StartAnimation(other));
                
             }
         }
-        
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("ITEM HERE");
+            other.GetComponent<ItemsThatCanBeGrab>().canGrab = true;
+            if (other.GetComponent<ItemsThatCanBeGrab>().canDestroy)
+            {
+                other.GetComponent<ItemsThatCanBeGrab>().canDestroy = false;
+                StartCoroutine(StartAnimation(other));
+
+            }
+        }
+
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Key"))
         {
             Debug.Log("KEY OUT");
             other.GetComponent<Key>().canGrab = false;
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("ITEM OUT");
+            other.GetComponent<ItemsThatCanBeGrab>().canGrab = false;
+
         }
     }
     IEnumerator PickUpItem(Collider other)
