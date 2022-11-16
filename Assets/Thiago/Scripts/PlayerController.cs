@@ -490,8 +490,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetButton("Run") && isBacking)
                 {
-                    StartCoroutine(stopMove());
-                    this.GetComponent<Animator>().Play("QuickTurn");
+                    //StartCoroutine(stopMove());
+                   // this.GetComponent<Animator>().Play("QuickTurn");
                 }
                 isRunning = true;
             }

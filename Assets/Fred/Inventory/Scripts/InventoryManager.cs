@@ -9,7 +9,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] AudioClip pickUpClip;
     [SerializeField] AudioClip pickDownClip;
     [SerializeField] AudioClip pickBothClip;
-    [SerializeField] GameObject key;
 
     public Transform inventorySlotHolder;
 
@@ -42,10 +41,6 @@ public class InventoryManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            AddItem(key, 1);
-        }
         if (inventory.activeSelf == true)
         {
             cursor.position = Input.mousePosition + offset;

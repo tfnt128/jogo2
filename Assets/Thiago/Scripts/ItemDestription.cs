@@ -11,6 +11,7 @@ public class ItemDestription : MonoBehaviour
     public TextMeshProUGUI textOB;
     public string description = "Description";
     public VideoPlayer videoPlayer;
+    public DialogueManager dialogue;
 
     public bool inReach;
     public bool pressed;
@@ -27,7 +28,7 @@ public class ItemDestription : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             inReach = true;
-            textOB.enabled = true;
+          //  textOB.enabled = true;
         }
     }
 
@@ -42,47 +43,21 @@ public class ItemDestription : MonoBehaviour
 
     void Update()
     {
-        if (isDoor)
-        {
-            
-            pressed = true;
-            textOB.enabled = true;
-            if (!GetComponent<DoorsWithLock>().showUnlockedMsg)
-            {
-                textOB.text = description.ToString();
-            }
-            else
-            {
-                textOB.text = "UNLOCKED";
-            }
-                
-            Time.timeScale = 0;
-            videoPlayer.Pause();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                pressed = false;
-                textOB.enabled = false;
-                textOB.text = "";
-                Time.timeScale = 1;
-                videoPlayer.Play();
-                isDoor = false;
-                this.GetComponent<ItemDestription>().enabled = false;
-            }
-        }
-        else if (inReach && Input.GetKeyDown(KeyCode.E) && inReach)
+       if (inReach && Input.GetKeyDown(KeyCode.E) && inReach)
         {
             if (!pressed)
             {
-                pressed = true;                
-                textOB.text = description.ToString();
+                pressed = true;
+                dialogue.textBox.enabled = true;
+                dialogue.PlayDialogue1();
                 Time.timeScale = 0;
                 videoPlayer.Pause();
             }
             else
             {
                 pressed = false;
-                textOB.enabled = false;
-                textOB.text = "";
+                dialogue.textBox.text = "";
+                dialogue.textBox.enabled = false;
                 Time.timeScale = 1;
                 videoPlayer.Play();
             }                        
