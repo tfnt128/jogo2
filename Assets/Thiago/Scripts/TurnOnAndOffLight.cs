@@ -6,7 +6,7 @@ public class TurnOnAndOffLight : MonoBehaviour
 {
     private bool isClose = false;
     public Light light;
-   // public Light light2;
+    public Light light2;
     public GameObject textIn;
     public GameObject textOut;
     public bool lightOFF;
@@ -19,7 +19,7 @@ public class TurnOnAndOffLight : MonoBehaviour
             {
                 lightOFF = true;
                 light.enabled = false;
-               // light2.enabled = false;
+                light2.enabled = false;
                 textIn.SetActive(false);
                 textOut.SetActive(true);
             }
@@ -27,7 +27,7 @@ public class TurnOnAndOffLight : MonoBehaviour
             {
                 lightOFF = false;
                 light.enabled = true;
-               // light2.enabled = true;
+                light2.enabled = true;
                 textIn.SetActive(true);
                 textOut.SetActive(false);
             }

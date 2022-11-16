@@ -25,6 +25,7 @@ public class ItemsThatCanBeGrab : MonoBehaviour
         {
             if(this.tag == "UV")
             {
+                FadeInAndOut.isItem1 = true;
                 FadeInAndOut.HasUV = true;
             }
             else

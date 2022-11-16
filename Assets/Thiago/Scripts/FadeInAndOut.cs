@@ -15,6 +15,7 @@ public class FadeInAndOut : MonoBehaviour
     [SerializeField] GameObject item;
     [SerializeField] GameObject item2;
     public bool isKey = false;
+    public bool isItem1 = false;
     public bool HasUV;
     public bool HasTool;
 
@@ -39,9 +40,18 @@ public class FadeInAndOut : MonoBehaviour
             InventoryManager.Instance.AddItem(key, 1);
             isKey = false;
         }
-        else
+        else 
         {
-            InventoryManager.Instance.AddItem(item, 1);
+            if (isItem1)
+            {
+                InventoryManager.Instance.AddItem(item, 1);
+                isItem1 = false;
+            }
+            else
+            {
+                InventoryManager.Instance.AddItem(item2, 1);
+            }
+            
         }
         
         yield return new WaitForSeconds(1f);

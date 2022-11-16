@@ -19,10 +19,13 @@ public class CodeVisible : MonoBehaviour
     public bool canExit;
     public TurnOnAndOffLight light;
 
+
     public GameObject go;
     public GameObject go2;
     public GameObject go3;
     public GameObject go4;
+
+    bool once;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,20 +36,27 @@ public class CodeVisible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (light.lightOFF && fadeinAndOut.HasUV)
+        if (fadeinAndOut.HasUV)
         {
-            go.SetActive(false);
-            go2.SetActive(false);
-            go3.SetActive(false);
-            go4.SetActive(true);
+            if(light.lightOFF)
+            {
+                Debug.Log("deqfcwdfwedf");
+                go.SetActive(false);
+                go2.SetActive(false);
+                go3.SetActive(false);
+                if(!once)
+                go4.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("JKXN AJSKNC SAJLNCS");
+                go.SetActive(false);
+                go2.SetActive(false);
+                go3.SetActive(true);
+                go4.SetActive(false);
+            }
         }
-        if(!light.lightOFF && fadeinAndOut.HasUV)
-        {
-            go.SetActive(false);
-            go2.SetActive(false);
-            go3.SetActive(true);
-        }
+
             if (fadeinAndOut.HasUV && turnOnAndOffLight.lightOFF && Input.GetKeyDown(KeyCode.E) && isClose)
         {
             
@@ -115,9 +125,11 @@ public class CodeVisible : MonoBehaviour
     }
     IEnumerator PlaceCodeWindow()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         normalWindow.SetActive(false);
         codedWindow.SetActive(true);
+        once = true;
+        go4.SetActive(false);
         canExit = true;
     }
     private void OnTriggerStay(Collider other)
