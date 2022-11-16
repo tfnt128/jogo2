@@ -31,9 +31,9 @@ public class FadeInAndOut : MonoBehaviour
     {
         FadeOut.SetActive(true);
         FadeIn.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
+        //SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
+        //yield return new WaitForSeconds(1f);
         if (isKey)
         {
             InventoryManager.Instance.AddItem(key, 1);
@@ -43,9 +43,8 @@ public class FadeInAndOut : MonoBehaviour
         {
             InventoryManager.Instance.AddItem(item, 1);
         }
-        
-        yield return new WaitForSeconds(1f);
-        SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
+        //yield return new WaitForSeconds(1f);
+        //SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
         FadeOut.SetActive(false);
         FadeIn.SetActive(true);
     }
