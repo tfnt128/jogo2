@@ -9,7 +9,7 @@ public class CodeVisible : MonoBehaviour
     CinemachineVirtualCamera currentCamera;
     public CinemachineVirtualCamera targetCameraIn;
     public CinemachineVirtualCamera targetCameraOut;
-    private PlayerController player;
+   // private PlayerController player;
     public bool isClose;
     bool isOpen;
     public FadeInAndOut fadeinAndOut;
@@ -18,6 +18,8 @@ public class CodeVisible : MonoBehaviour
     public GameObject codedWindow;
     public bool canExit;
     public TurnOnAndOffLight light;
+
+    public PlayerController player;
 
 
     public GameObject go;
@@ -40,7 +42,6 @@ public class CodeVisible : MonoBehaviour
         {
             if(light.lightOFF)
             {
-                Debug.Log("deqfcwdfwedf");
                 go.SetActive(false);
                 go2.SetActive(false);
                 go3.SetActive(false);
@@ -49,7 +50,6 @@ public class CodeVisible : MonoBehaviour
             }
             else
             {
-                Debug.Log("JKXN AJSKNC SAJLNCS");
                 go.SetActive(false);
                 go2.SetActive(false);
                 go3.SetActive(true);

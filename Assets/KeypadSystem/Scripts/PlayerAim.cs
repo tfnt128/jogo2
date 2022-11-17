@@ -10,6 +10,7 @@ public class PlayerAim : MonoBehaviour
     public Transform headPos;
     public Camera camera;
     public Camera cameraZoom;
+    public LayerMask layerMask;
 
     private void Update()
     {
@@ -17,7 +18,7 @@ public class PlayerAim : MonoBehaviour
             RaycastHit hit;
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, layerMask))
             {
                 Debug.DrawRay(ray.origin, ray.direction * 20, Color.green);
 

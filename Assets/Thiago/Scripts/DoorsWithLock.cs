@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class DoorsWithLock : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class DoorsWithLock : MonoBehaviour
     public bool isMessaging = false;
     public bool canSpawnMsg = false;
     public bool canUnlocked = false;
+    public VideoPlayer videoPlayer;
 
     private void Start()
     {
@@ -29,6 +31,7 @@ public class DoorsWithLock : MonoBehaviour
             player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = false;
             dialogue.textBox.text = "";
             dialogue.textBox.enabled = false;
+            videoPlayer.Play();
 
             if (player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked)
             {
@@ -39,14 +42,18 @@ public class DoorsWithLock : MonoBehaviour
                 
             }
         }
-        if (player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
+        if (player.canOpenDoor)
         {
-            Time.timeScale = 0;
+            if (player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
         }
-        else
-        {
-            Time.timeScale = 1;
-        }
+        
 
         if (locked)
         {
@@ -60,7 +67,6 @@ public class DoorsWithLock : MonoBehaviour
 
         if (player.canOpenDoor && player.canMove && Input.GetKeyDown(KeyCode.E))
         {
-            
             if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked)
             {
                 
@@ -74,6 +80,7 @@ public class DoorsWithLock : MonoBehaviour
                         dialogue.textBox.enabled = true;
                         dialogue.PlayDialogue1();
                         player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
+                        videoPlayer.Pause();
                     }
 
 
@@ -89,6 +96,7 @@ public class DoorsWithLock : MonoBehaviour
                         dialogue.PlayDialogue2();
                         player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
                         player.hitinfo.collider.GetComponent<DoorsWithLock>().canUnlocked = true;
+                        videoPlayer.Pause();
                     }                    
                     }
                 
