@@ -8,12 +8,14 @@ public class ClosetPuzzle : MonoBehaviour
     public bool isClose;
     public GameObject go;
     public GameObject go2;
+    [SerializeField] public AudioSource audioSource;
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && isClose)
         {
             go.SetActive(false);
             go2.SetActive(true);
+            audioSource.Play();
         }
     }
 
