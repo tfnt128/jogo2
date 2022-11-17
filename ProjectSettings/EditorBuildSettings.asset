@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Fred/InventoryScene.unity
     guid: d5d852eaf4c4de649b9398b736e43442
+  - enabled: 1
+    path: Assets/Scenes/Demo_1.unity
+    guid: 08cdd6077847610419d4f666a8347a3a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ca32edfaf1ec47d43a4e12806929b6e3,
       type: 2}
