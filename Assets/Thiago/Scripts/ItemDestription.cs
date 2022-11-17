@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.Video;
 
 public class ItemDestription : MonoBehaviour
 {
-    public TextMeshProUGUI textOB;
     public string description = "Description";
     public VideoPlayer videoPlayer;
     public DialogueManager dialogue;
@@ -18,17 +16,11 @@ public class ItemDestription : MonoBehaviour
     public bool isDoor;
 
 
-    void Start()
-    {
-        textOB.enabled = false;
-    }
-
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             inReach = true;
-          //  textOB.enabled = true;
         }
     }
 
