@@ -7,7 +7,7 @@ public class EndLevel : MonoBehaviour
 {
     void LastDoor()
     {
-        SceneManager.LoadScene("EndingScreen");
+        SceneManager.LoadScene("EndScene");
     }
 
     private void OnTriggerEnter(Collider other)
