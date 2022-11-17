@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.Rendering.LookDev;
+//using UnityEditor.PackageManager;
+//using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.UI;
 
