@@ -98,11 +98,11 @@ public class PlayerController : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider>();
         _input = GetComponent<HumanoidLandInput>();
 
-        _maxAscendRayDistance = _maxStepHeight / Mathf.Cos(_maximumAngleOfApproachToAscend * Mathf.Deg2Rad);
-        _maxDescendRayDistance = _maxStepHeight / Mathf.Cos(80.0f * Mathf.Deg2Rad);
+        //_maxAscendRayDistance = _maxStepHeight / Mathf.Cos(_maximumAngleOfApproachToAscend * Mathf.Deg2Rad);
+       // _maxDescendRayDistance = _maxStepHeight / Mathf.Cos(80.0f * Mathf.Deg2Rad);
 
-        _numberOfStepDetectRays = Mathf.RoundToInt(((_maxStepHeight * 100.0f) * 0.5f) + 1.0f);
-        _rayIncrementAmount = _maxStepHeight / _numberOfStepDetectRays;
+       // _numberOfStepDetectRays = Mathf.RoundToInt(((_maxStepHeight * 100.0f) * 0.5f) + 1.0f);
+       // _rayIncrementAmount = _maxStepHeight / _numberOfStepDetectRays;
     }
     private void Start()
     {
@@ -133,41 +133,41 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _playerMoveInput = GetMoveInput();
-        _playerCenterPoint = MyRb.position + _capsuleCollider.center;
+      //  _playerMoveInput = GetMoveInput();
+     //   _playerCenterPoint = MyRb.position + _capsuleCollider.center;
        // _playerMoveInput = PlayerStairs();
        // _playerMoveInput = PlayerSlope();
-        _playerIsGrounded = PlayerGroundCheck();
+     //   _playerIsGrounded = PlayerGroundCheck();
       //  _playerMoveInput.y = PlayerFallGravity();
 
 
         if (!isMoving)
         {
             // Stairs.material.staticFriction = 5;
-            StairsMaterial.staticFriction = 5;
-            StairsMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
+          //  StairsMaterial.staticFriction = 5;
+          //  StairsMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
         }
         else
         {
             // Stairs.material.staticFriction = 0;
-            StairsMaterial.staticFriction = 0;
-            StairsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+         //   StairsMaterial.staticFriction = 0;
+          //  StairsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
         }
 
         if (isRunning)
         {
-            _ascendingStairsMovementMultiplier = 1000.0f;
+          //  _ascendingStairsMovementMultiplier = 1000.0f;
         }
         else
         {
-            _ascendingStairsMovementMultiplier = 3500.0f;
+          //  _ascendingStairsMovementMultiplier = 3500.0f;
         }
 
 
 
 
 
-        Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);
+       // Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);
 
         MyRb.AddRelativeForce(_playerMoveInput, ForceMode.Force);
 
