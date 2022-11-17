@@ -41,4 +41,8 @@ public class TextColorSwitch : MonoBehaviour
     {
         SceneManager.LoadScene(name);
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
