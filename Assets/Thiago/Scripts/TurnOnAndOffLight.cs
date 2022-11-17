@@ -10,11 +10,13 @@ public class TurnOnAndOffLight : MonoBehaviour
     public GameObject textIn;
     public GameObject textOut;
     public bool lightOFF;
+    [SerializeField] public AudioSource audioSource;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isClose)
         {
+            audioSource.Play();
             if (light.enabled)
             {
                 lightOFF = true;

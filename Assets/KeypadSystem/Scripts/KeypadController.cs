@@ -14,6 +14,7 @@ public class KeypadController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip correctSound;
     public AudioClip wrongSound;
+    public AudioClip digit;
 
     public DoorsWithLock door;
     public bool corrertPass = false;
@@ -34,6 +35,12 @@ public class KeypadController : MonoBehaviour
             Enter();
             return;
         }
+        if (number != "Clear" && number != "Enter")
+        {
+            if (audioSource != null)
+                audioSource.PlayOneShot(digit);
+        }
+
 
         int length = passwordText.text.ToString().Length;
         if(length<passwordLimit)

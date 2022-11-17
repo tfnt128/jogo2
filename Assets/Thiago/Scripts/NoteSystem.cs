@@ -11,6 +11,8 @@ public class NoteSystem : MonoBehaviour
     public GameObject FadeIn;
     private PlayerController player;
     private bool isClose = false;
+    [SerializeField] public AudioSource audioSource;
+    [SerializeField] AudioClip[] audioClipsArray = new AudioClip[2];
 
     void Start()
     {
@@ -20,11 +22,19 @@ public class NoteSystem : MonoBehaviour
     {
         if (noteScreen.active)
         {
+
             player.canMove = false;
         }
        
         if (Input.GetKeyDown(KeyCode.E) && isClose)
-        {            
+        {
+            if (!noteScreen.active)
+            {
+                audioSource.clip = audioClipsArray[0];
+                audioSource.Play();
+
+            }
+
             StartCoroutine(FadeInFadeOut());
             
         }
@@ -32,6 +42,7 @@ public class NoteSystem : MonoBehaviour
         {
             FadeOut.SetActive(true);
             FadeIn.SetActive(false);
+            
             yield return new WaitForSeconds(1.2f);
             isClose = true;
             if (noteScreen.active)

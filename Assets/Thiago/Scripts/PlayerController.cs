@@ -206,182 +206,9 @@ public class PlayerController : MonoBehaviour
                 (_playerCenterToGroundDistance <= _capsuleCollider.bounds.extents.y + _groundCheckDistanceTolerance));
     }
 
-    private Vector3 AscendStairs(Vector3 calculatedStepInput)
-    {
-        if (isMoving)
-        {
-            float calculatedVelDistance = _isFirstStep ? (MyRb.velocity.magnitude * _firstStepVelocityDistanceMultiplier) + _capsuleCollider.radius : _capsuleCollider.radius;
+    
 
-            float ray = 0.0f;
-            List<RaycastHit> raysThatHit = new List<RaycastHit>();
-            for (int x = 1;
-                 x <= _numberOfStepDetectRays;
-                 x++, ray += _rayIncrementAmount)
-            {
-                Vector3 rayLower = new Vector3(_playerCenterPoint.x, ((_playerCenterPoint.y - _playerHalfHeightToGround) + ray), _playerCenterPoint.z);
-                RaycastHit hitLower;
-                if (Physics.Raycast(rayLower, MyRb.transform.TransformDirection(_playerMoveInput), out hitLower, calculatedVelDistance + _maxAscendRayDistance))
-                {
-                    float stairSlopeAngle = Vector3.Angle(hitLower.normal, MyRb.transform.up);
-                    if (stairSlopeAngle == 90.0f)
-                    {
-                        raysThatHit.Add(hitLower);
-                    }
-                }
-            }
-            //  Debug.Log(raysThatHit.Count);
-            if (raysThatHit.Count > 0)
-            {
-                Vector3 rayUpper = new Vector3(_playerCenterPoint.x, (((_playerCenterPoint.y - _playerHalfHeightToGround) + _maxStepHeight) + _rayIncrementAmount), _playerCenterPoint.z);
-                RaycastHit hitUpper;
-                Physics.Raycast(rayUpper, MyRb.transform.TransformDirection(_playerMoveInput), out hitUpper, calculatedVelDistance + (_maxAscendRayDistance * 2.0f));
-                if (!(hitUpper.collider) ||
-                     (hitUpper.distance - raysThatHit[0].distance) > _minStepDepth)
-                {
-                    if (Vector3.Angle(raysThatHit[0].normal, MyRb.transform.TransformDirection(-_playerMoveInput)) <= _maximumAngleOfApproachToAscend)
-                    {
-                        Debug.DrawRay(rayUpper, MyRb.transform.TransformDirection(_playerMoveInput), Color.yellow, 5.0f);
 
-                        _playerIsAscendingStairs = true;
-                        Vector3 playerRelX = Vector3.Cross(_playerMoveInput, Vector3.up);
-
-                        if (_isFirstStep)
-                        {
-                            calculatedStepInput = Quaternion.AngleAxis(45.0f, playerRelX) * calculatedStepInput;
-                            _isFirstStep = false;
-                        }
-                        else
-                        {
-                            float stairHeight = raysThatHit.Count * _rayIncrementAmount * _stairHeightPaddingMultiplier;
-
-                            float avgDistance = 0.0f;
-                            foreach (RaycastHit r in raysThatHit)
-                            {
-                                avgDistance += r.distance;
-                            }
-                            avgDistance /= raysThatHit.Count;
-
-                            float tanAngle = Mathf.Atan2(stairHeight, avgDistance) * Mathf.Rad2Deg;
-                            calculatedStepInput = Quaternion.AngleAxis(tanAngle, playerRelX) * calculatedStepInput;
-                            calculatedStepInput *= _ascendingStairsMovementMultiplier;
-                        }
-
-                    }
-                    else
-                    {
-                        _playerIsAscendingStairs = false;
-                        _isFirstStep = true;
-                    }
-                }
-                else
-                {
-                    _playerIsAscendingStairs = false;
-                    _isFirstStep = true;
-                }
-            }
-            else
-            {
-                _playerIsAscendingStairs = false;
-                _isFirstStep = true;
-            }
-        }
-        else
-        {
-            _playerIsAscendingStairs = false;
-            _isFirstStep = true;
-        }
-        return calculatedStepInput;
-    }
-
-    private Vector3 DescendStairs(Vector3 calculatedStepInput)
-    {
-        if (isMoving)
-        {
-            float ray = 0.0f;
-            List<RaycastHit> raysThatHit = new List<RaycastHit>();
-            for (int x = 1;
-                 x <= _numberOfStepDetectRays;
-                 x++, ray += _rayIncrementAmount)
-            {
-                Vector3 rayLower = new Vector3(_playerCenterPoint.x, ((_playerCenterPoint.y - _playerHalfHeightToGround) + ray), _playerCenterPoint.z);
-                RaycastHit hitLower;
-                if (Physics.Raycast(rayLower, MyRb.transform.TransformDirection(-_playerMoveInput), out hitLower, _capsuleCollider.radius + _maxDescendRayDistance))
-                {
-                    float stairSlopeAngle = Vector3.Angle(hitLower.normal, MyRb.transform.up);
-                    if (stairSlopeAngle == 90.0f)
-                    {
-                        raysThatHit.Add(hitLower);
-                    }
-                }
-            }
-            if (raysThatHit.Count > 0)
-            {
-                Vector3 rayUpper = new Vector3(_playerCenterPoint.x, (((_playerCenterPoint.y - _playerHalfHeightToGround) + _maxStepHeight) + _rayIncrementAmount), _playerCenterPoint.z);
-                RaycastHit hitUpper;
-                Physics.Raycast(rayUpper, MyRb.transform.TransformDirection(-_playerMoveInput), out hitUpper, _capsuleCollider.radius + (_maxDescendRayDistance * 2.0f));
-                if (!(hitUpper.collider) ||
-                     (hitUpper.distance - raysThatHit[0].distance) > _minStepDepth)
-                {
-                    if (!(_playerIsGrounded) && hitUpper.distance < _capsuleCollider.radius + (_maxDescendRayDistance * 2.0f))
-                    {
-                        Debug.DrawRay(rayUpper, MyRb.transform.TransformDirection(-_playerMoveInput), Color.yellow, 5.0f);
-
-                        _playerIsDescendingStairs = true;
-                        Vector3 playerRelX = Vector3.Cross(_playerMoveInput, Vector3.up);
-
-                        float stairHeight = raysThatHit.Count * _rayIncrementAmount * _stairHeightPaddingMultiplier;
-
-                        float avgDistance = 0.0f;
-                        foreach (RaycastHit r in raysThatHit)
-                        {
-                            avgDistance += r.distance;
-                        }
-                        avgDistance /= raysThatHit.Count;
-
-                        float tanAngle = Mathf.Atan2(stairHeight, avgDistance) * Mathf.Rad2Deg;
-                        calculatedStepInput = Quaternion.AngleAxis(tanAngle - 90.0f, playerRelX) * calculatedStepInput;
-                        calculatedStepInput *= _descendingStairsMovementMultiplier;
-                    }
-                    else
-                    {
-                        _playerIsDescendingStairs = false;
-                    }
-                }
-                else
-                {
-                    _playerIsDescendingStairs = false;
-                }
-            }
-            else
-            {
-                _playerIsDescendingStairs = false;
-            }
-        }
-        else
-        {
-            _playerIsDescendingStairs = false;
-        }
-        return calculatedStepInput;
-    }
-
-    private Vector3 PlayerStairs()
-    {
-        Vector3 calculatedStepInput = _playerMoveInput;
-
-        _playerHalfHeightToGround = _capsuleCollider.bounds.extents.y;
-        if (_playerCenterToGroundDistance < _capsuleCollider.bounds.extents.y)
-        {
-            _playerHalfHeightToGround = _playerCenterToGroundDistance;
-        }
-
-        calculatedStepInput = AscendStairs(calculatedStepInput);
-        if (!(_playerIsAscendingStairs))
-        {
-            calculatedStepInput = DescendStairs(calculatedStepInput);
-        }
-        return calculatedStepInput;
-
-    }
 
     private float PlayerFallGravity()
     {
@@ -513,7 +340,7 @@ public class PlayerController : MonoBehaviour
                 isMoving = true;
                 if (Input.GetButton("SKey"))
                 {
-                    verticalSpeed = 100f;
+                    verticalSpeed = 75f;
                     isBacking = true;
                 }
                 else
@@ -521,11 +348,11 @@ public class PlayerController : MonoBehaviour
                     isBacking = false;
                     if (!isRunning)
                     {
-                        verticalSpeed = 250f;
+                        verticalSpeed = 150f;
                     }
                     else
                     {
-                        verticalSpeed = 600f;
+                        verticalSpeed = 400f;
                     }
                 }
                 verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
