@@ -13,6 +13,7 @@ public class NoteSystem : MonoBehaviour
     private bool isClose = false;
     [SerializeField] public AudioSource audioSource;
     [SerializeField] AudioClip[] audioClipsArray = new AudioClip[2];
+    public bool wasOpenedOnce;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class NoteSystem : MonoBehaviour
             {
                 audioSource.clip = audioClipsArray[0];
                 audioSource.Play();
+                wasOpenedOnce = true;
 
             }
 

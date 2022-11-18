@@ -20,7 +20,7 @@ public class DialogueVertexAnimator {
     private static readonly Vector3 vecZero = Vector3.zero;
     public IEnumerator AnimateTextIn(List<DialogueCommand> commands, string processedMessage, Action onFinish) {
         textAnimating = true;
-        float secondsPerCharacter = 8f / 150f;
+        float secondsPerCharacter = 4f / 150f;
         float timeOfLastCharacter = 0;
 
         TextAnimInfo[] textAnimInfo = SeparateOutTextAnimInfo(commands);

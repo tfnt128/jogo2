@@ -18,7 +18,7 @@ public class FadeInAndOut : MonoBehaviour
     public bool isItem1 = false;
     public bool HasUV;
     public bool HasTool;
-
+    public bool isFandingIn = false;
     private void Update()
     {
         if (act)
@@ -30,9 +30,11 @@ public class FadeInAndOut : MonoBehaviour
     }
     IEnumerator FadeInFadeOut()
     {
+        isFandingIn = false;
         FadeOut.SetActive(true);
         FadeIn.SetActive(false);
         yield return new WaitForSeconds(3f);
+        isFandingIn = true;
         //SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
         //yield return new WaitForSeconds(1f);
         if (isKey)
@@ -55,6 +57,7 @@ public class FadeInAndOut : MonoBehaviour
         }
         //yield return new WaitForSeconds(1f);
         //SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
+        
         FadeOut.SetActive(false);
         FadeIn.SetActive(true);
     }
