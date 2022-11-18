@@ -35,6 +35,7 @@ public class FadeInAndOut : MonoBehaviour
         FadeIn.SetActive(false);
         yield return new WaitForSeconds(3f);
         isFandingIn = true;
+        StartCoroutine(isFadingoff());
         //SceneManager.LoadScene("InventoryScene", LoadSceneMode.Additive);
         //yield return new WaitForSeconds(1f);
         if (isKey)
@@ -60,5 +61,12 @@ public class FadeInAndOut : MonoBehaviour
         
         FadeOut.SetActive(false);
         FadeIn.SetActive(true);
+    }
+
+    IEnumerator isFadingoff()
+    {
+        yield return new WaitForSeconds(1f);
+        isFandingIn = false;
+
     }
 }

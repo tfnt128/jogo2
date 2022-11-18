@@ -46,9 +46,13 @@ public class KeyPad : MonoBehaviour
                 currentCamera.tag = "InactiveCamera";
                 currentCamera.Priority = 99;
             }
+            keypad.corrertPass = false;
             Destroy(GetComponent<Collider>());
             Destroy(targetCameraIn);
-            keypad.corrertPass = false;
+            gameObject.GetComponent<KeyPad>().enabled = false;
+
+
+
         }
 
         if(Input.GetKeyDown(KeyCode.E) && isClose)

@@ -12,6 +12,7 @@ public class ReachKey : MonoBehaviour
     public GameObject wire;
     public bool isClose;
     public ItemDestription destription;
+    [SerializeField] public AudioSource audioSource;
     bool wireCut = false;
     int count = 0;
 
@@ -39,9 +40,10 @@ public class ReachKey : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E) && fadeinAndOut.HasTool && isClose && count == 0)
         {
             count++;
+            audioSource.Play();
+            door.hasKey = true;
             fadeinAndOut.isKey = true;
             fadeinAndOut.act = true;
-            wireCut = true;
         }
     }
 
