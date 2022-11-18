@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Alan/StartMenu/StartMenu.unity
     guid: 855b7c64cc9c97046a89bcd9c5c227eb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Fred/InventoryScene.unity
     guid: d5d852eaf4c4de649b9398b736e43442
   - enabled: 1
