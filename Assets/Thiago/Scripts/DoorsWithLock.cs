@@ -31,7 +31,7 @@ public class DoorsWithLock : MonoBehaviour
     private void Update()
     {
 
-        if (player.canOpenDoor)
+        if (player.canOpenDoor && player.canMove)
         {
             var thisDoor = player.hitinfo.collider.GetComponent<DoorsWithLock>();
             if (Input.GetKeyDown(KeyCode.E))

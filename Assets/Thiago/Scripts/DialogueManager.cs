@@ -14,15 +14,26 @@ public class DialogueManager : MonoBehaviour
     [TextArea]
     public string dialogue2;
 
-    private DialogueVertexAnimator dialogueVertexAnimator;
+    public DialogueVertexAnimator dialogueVertexAnimator;
     void Awake() {
         dialogueVertexAnimator = new DialogueVertexAnimator(textBox);
     }
     private void Update()
     {
+        Debug.Log(dialogueVertexAnimator.hadEnded);
     }
     public void PlayDialogue1() {
         PlayDialogue(dialogue1);
+    }
+    public void AcelerateDialogue()
+        
+    {
+        dialogueVertexAnimator.secondsPerCharacter = 0.2f / 150f;
+    }
+    public void BackToNormalDialogue()
+
+    {
+        dialogueVertexAnimator.secondsPerCharacter = 5f / 150f;
     }
     public void PlayDialogue2()
     {

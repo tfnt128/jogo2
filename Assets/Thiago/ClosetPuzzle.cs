@@ -26,11 +26,13 @@ public class ClosetPuzzle : MonoBehaviour
             audioSource.Play();
             endPuzzle = true;
             StartCoroutine(message());
-            
+            destription.dialogue.dialogueVertexAnimator.hadEnded = false;
+
+
         }
-        if (Input.GetKeyDown(KeyCode.E) && isClose && canClose)
+        if (Input.GetKeyDown(KeyCode.E) && isClose && canClose && destription.dialogue.dialogueVertexAnimator.hadEnded)
         {
-            destription.pressed = false;
+          //  destription.pressed = false;
             destription.dialogue.textBox.text = "";
             destription.dialogue.textBox.enabled = false;
             Time.timeScale = 1;
@@ -62,7 +64,7 @@ public class ClosetPuzzle : MonoBehaviour
         yield return new WaitForSeconds(2f);
         playerController.canMove = true; ;
         destription.dialogue.PlayDialogue1();
-        destription.pressed = true;
+        //destription.pressed = true;
         destription.dialogue.textBox.enabled = true;
         destription.dialogue.PlayDialogue1();
         Time.timeScale = 0;
