@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sair
+  m_text: Exit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3e97eccf342d5d45afb8522ce81a80f, type: 2}
   m_sharedMaterial: {fileID: 3324516436944920708, guid: b3e97eccf342d5d45afb8522ce81a80f,
@@ -1884,7 +1884,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32930
+  m_Name: pb_Mesh6516806
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3722,7 +3722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Op\xE7\xF5es"
+  m_text: Options
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3e97eccf342d5d45afb8522ce81a80f, type: 2}
   m_sharedMaterial: {fileID: 3324516436944920708, guid: b3e97eccf342d5d45afb8522ce81a80f,
@@ -4105,7 +4105,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jogo novo
+  m_text: New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3e97eccf342d5d45afb8522ce81a80f, type: 2}
   m_sharedMaterial: {fileID: 3324516436944920708, guid: b3e97eccf342d5d45afb8522ce81a80f,

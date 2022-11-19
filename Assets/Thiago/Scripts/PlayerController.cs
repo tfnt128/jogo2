@@ -13,6 +13,10 @@ using UnityEngine.InputSystem.Controls;
 public class PlayerController : MonoBehaviour
 {
 
+    public float walkVelocity;
+    public float backVelocity;
+    public float runVelocity;
+
     public bool canMove = true;
     public RaycastHit hitinfo;
     public bool canOpenDoor = false;
@@ -95,8 +99,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _capsuleCollider = GetComponent<CapsuleCollider>();
-        _input = GetComponent<HumanoidLandInput>();
+       // _capsuleCollider = GetComponent<CapsuleCollider>();
+       // _input = GetComponent<HumanoidLandInput>();
 
         //_maxAscendRayDistance = _maxStepHeight / Mathf.Cos(_maximumAngleOfApproachToAscend * Mathf.Deg2Rad);
        // _maxDescendRayDistance = _maxStepHeight / Mathf.Cos(80.0f * Mathf.Deg2Rad);
@@ -115,14 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isTank)
-        {
-            TankControlUpdate();
-        }
-        else
-        {
-            ModernControllerUpdate();
-        }
+
         if (life <= 0)
         {
             Debug.Log("You are dead");
@@ -133,12 +130,20 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-      //  _playerMoveInput = GetMoveInput();
-     //   _playerCenterPoint = MyRb.position + _capsuleCollider.center;
-       // _playerMoveInput = PlayerStairs();
-       // _playerMoveInput = PlayerSlope();
-     //   _playerIsGrounded = PlayerGroundCheck();
-      //  _playerMoveInput.y = PlayerFallGravity();
+        if (!isTank)
+        {
+            ModernControllerFixedUpdate();
+        }
+        else
+        {
+            TankControlUpdate();
+        }
+        //  _playerMoveInput = GetMoveInput();
+        //   _playerCenterPoint = MyRb.position + _capsuleCollider.center;
+        // _playerMoveInput = PlayerStairs();
+        // _playerMoveInput = PlayerSlope();
+        //   _playerIsGrounded = PlayerGroundCheck();
+        //  _playerMoveInput.y = PlayerFallGravity();
 
 
         if (!isMoving)
@@ -169,13 +174,10 @@ public class PlayerController : MonoBehaviour
 
        // Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);
 
-        MyRb.AddRelativeForce(_playerMoveInput, ForceMode.Force);
+        //MyRb.AddRelativeForce(_playerMoveInput, ForceMode.Force);
 
 
-        if (!isTank)
-        {
-            ModernControllerFixedUpdate();
-        }
+        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -188,15 +190,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
-
-    public void SetDoorTransform(Transform Door)
-    {
-        doorTransform = Door;
-    }
-    public Transform GetDoorTransform()
-    {
-        return doorTransform;
-    }
     private bool PlayerGroundCheck()
     {
         float sphereCastRadius = _capsuleCollider.radius * _groundCheckRadiusMultiplier;
@@ -503,7 +496,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButton("Horizontal") && !canStopAnim)
             {
-                horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * horizontalSpeed;
+                horizontalMove = (Input.GetAxis("Horizontal") * horizontalSpeed) * Time.deltaTime;
                 this.transform.Rotate(0, horizontalMove, 0);
             }
 
@@ -513,7 +506,7 @@ public class PlayerController : MonoBehaviour
                 isMoving = true;
                 if (Input.GetButton("SKey"))
                 {
-                    verticalSpeed = 100f;
+                    verticalSpeed = backVelocity;
                     isBacking = true;
                 }
                 else
@@ -521,14 +514,14 @@ public class PlayerController : MonoBehaviour
                     isBacking = false;
                     if (!isRunning)
                     {
-                        verticalSpeed = 250f;
+                        verticalSpeed = walkVelocity;
                     }
                     else
                     {
-                        verticalSpeed = 600f;
+                        verticalSpeed = runVelocity;
                     }
                 }
-                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * verticalSpeed;
+                verticalMove = (Input.GetAxis("Vertical") * verticalSpeed) * Time.deltaTime; 
 
                 if (isBacking)
                 {
@@ -636,6 +629,11 @@ public class PlayerController : MonoBehaviour
 
     private void ModernControllerUpdate()
     {
+        
+    }
+
+    private void ModernControllerFixedUpdate()
+    {
         if (canMove)
         {
 
@@ -677,10 +675,6 @@ public class PlayerController : MonoBehaviour
             v1.y = MyRb.velocity.y;
             MyRb.velocity = v1;
         }
-    }
-
-    private void ModernControllerFixedUpdate()
-    {
         moveDirection = verticalMove * viewForwardModern + horizontalMove * viewRight;
         if (moveDirection.sqrMagnitude > 1f)
         {

@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "PRESSIONE ALGUM BOT\xC3O PARA COME\xC7AR"
+  m_text: PRESS ANY BUTTON TO START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3e97eccf342d5d45afb8522ce81a80f, type: 2}
   m_sharedMaterial: {fileID: 3324516436944920708, guid: b3e97eccf342d5d45afb8522ce81a80f,

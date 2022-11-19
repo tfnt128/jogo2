@@ -9,6 +9,7 @@ public class ClosetPuzzle : MonoBehaviour
     public bool isClose;
     public GameObject go;
     public GameObject go2;
+    public GameObject closetMsg1;
     public NoteSystem noteSystem;
     bool endPuzzle = false;
     [SerializeField] public AudioSource audioSource;
@@ -25,6 +26,7 @@ public class ClosetPuzzle : MonoBehaviour
             audioSource.Play();
             endPuzzle = true;
             StartCoroutine(message());
+            
         }
         if (Input.GetKeyDown(KeyCode.E) && isClose && canClose)
         {
@@ -35,6 +37,8 @@ public class ClosetPuzzle : MonoBehaviour
             destription.videoPlayer.Play();
             destription.isMessaging = false;
             destription.gameObject.SetActive(false);
+            Destroy(closetMsg1);
+            closetMsg1.SetActive(false);
         }
     }
 
