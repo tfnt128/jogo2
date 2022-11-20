@@ -11,6 +11,8 @@ public class ItemsThatCanBeGrab : MonoBehaviour
     public bool canGrab;
     public bool canDestroy;
     public FadeInAndOut FadeInAndOut;
+    public int count = 0;
+    public int itemNumber = 0;
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();

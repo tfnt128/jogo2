@@ -19,12 +19,33 @@ public class FadeInAndOut : MonoBehaviour
     public bool HasUV;
     public bool HasTool;
     public bool isFandingIn = false;
+    public int keyNumber;
+    public DialogueManager[] dialoguesKey = new DialogueManager[2];
+    public DialogueManager[] dialoguesItem = new DialogueManager[2];
+    public int itemNumber;
     private void Update()
     {
         if (act)
         {
             act = false;
             StartCoroutine(FadeInFadeOut());             
+        }
+        if(Input.GetKeyDown(KeyCode.E) && Time.timeScale == 0)
+        {
+            if (isKey)
+            {
+                isKey = false;
+                dialoguesKey[keyNumber].textBox.text = "";
+                dialoguesKey[keyNumber].textBox.enabled = false;
+            }
+            else
+            {
+                dialoguesItem[itemNumber].textBox.text = "";
+                dialoguesItem[itemNumber].textBox.enabled = false;
+            }
+            
+            
+            Time.timeScale = 1;
         }
         
     }
@@ -41,10 +62,15 @@ public class FadeInAndOut : MonoBehaviour
         if (isKey)
         {
             InventoryManager.Instance.AddItem(key, 1);
-            isKey = false;
+            dialoguesKey[keyNumber].textBox.enabled = true;
+            dialoguesKey[keyNumber].PlayDialogue1();            
+            Time.timeScale = 0;
         }
         else 
         {
+            dialoguesItem[itemNumber].textBox.enabled = true;
+            dialoguesItem[itemNumber].PlayDialogue1();
+            Time.timeScale = 0;
             if (isItem1)
             {
                 InventoryManager.Instance.AddItem(item, 1);
@@ -55,6 +81,7 @@ public class FadeInAndOut : MonoBehaviour
                 InventoryManager.Instance.AddItem(item2, 1);
             }
             
+
         }
         //yield return new WaitForSeconds(1f);
         //SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);

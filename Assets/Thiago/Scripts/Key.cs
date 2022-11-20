@@ -9,6 +9,8 @@ public class Key : MonoBehaviour
     public GameObject Particle;
     public bool canGrab;
     public bool canDestroy;
+    public int count = 0;
+    public int keyNumber;
 
     private void Start()
     {

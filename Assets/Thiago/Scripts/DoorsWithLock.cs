@@ -61,8 +61,8 @@ public class DoorsWithLock : MonoBehaviour
                         player.hitinfo.collider.GetComponent<DoorsWithLock>().GetComponent<AudioSource>().Play();
                         if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
                         {
-                            dialogue.textBox.enabled = true;
-                            dialogue.PlayDialogue1();
+                            player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.enabled = true;
+                            player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.PlayDialogue1();
                             player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
                         }
                     }
@@ -70,8 +70,8 @@ public class DoorsWithLock : MonoBehaviour
                     {
                         if (!player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
                         {
-                            dialogue.textBox.enabled = true;
-                            dialogue.PlayDialogue2();
+                            player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.enabled = true;
+                            player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.PlayDialogue2();
                             player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = true;
                             player.hitinfo.collider.GetComponent<DoorsWithLock>().GetComponent<AudioSource>().clip = audioClipsArray[2];
                             player.hitinfo.collider.GetComponent<DoorsWithLock>().GetComponent<AudioSource>().Play();
@@ -104,8 +104,8 @@ public class DoorsWithLock : MonoBehaviour
                 if (player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
                 {
                     player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = false;
-                    dialogue.textBox.text = "";
-                    dialogue.textBox.enabled = false;
+                    player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.text = "";
+                    player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.enabled = false;
                 }
             }
             IEnumerator Order()

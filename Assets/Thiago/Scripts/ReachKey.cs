@@ -42,8 +42,10 @@ public class ReachKey : MonoBehaviour
             count++;
             audioSource.Play();
             door.hasKey = true;
-            fadeinAndOut.isKey = true;
-            fadeinAndOut.act = true;
+            StartCoroutine(destroyItems()); 
+            
+            // fadeinAndOut.isKey = true;
+            //fadeinAndOut.act = true;
         }
     }
 
@@ -60,5 +62,13 @@ public class ReachKey : MonoBehaviour
         {
             isClose = false;
         }
+    }
+    IEnumerator destroyItems()
+    {
+        yield return new WaitForSeconds(0.1f);
+        go2.SetActive(false);
+        Destroy(wire);
+        Destroy(this.gameObject);
+        Destroy(particle);
     }
 }

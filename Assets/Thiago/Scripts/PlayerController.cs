@@ -747,9 +747,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("KEY HERE");
             other.GetComponent<Key>().canGrab = true;
-            if (other.GetComponent<Key>().canDestroy)
+            if (other.GetComponent<Key>().canDestroy && other.GetComponent<Key>().count == 0)
             {
+                other.GetComponent<Key>().count++;
                 other.GetComponent<Key>().canDestroy = false;
+
+                fadeInAndOut.keyNumber = other.GetComponent<Key>().keyNumber;
                 fadeInAndOut.isKey = true;
                 StartCoroutine(StartAnimation(other));
                
@@ -759,9 +762,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("ITEM HERE");
             other.GetComponent<ItemsThatCanBeGrab>().canGrab = true;
-            if (other.GetComponent<ItemsThatCanBeGrab>().canDestroy)
+            if (other.GetComponent<ItemsThatCanBeGrab>().canDestroy && other.GetComponent<ItemsThatCanBeGrab>().count == 0)
             {
+                other.GetComponent<ItemsThatCanBeGrab>().count++;
                 other.GetComponent<ItemsThatCanBeGrab>().canDestroy = false;
+                fadeInAndOut.itemNumber = other.GetComponent<ItemsThatCanBeGrab>().itemNumber;
                 StartCoroutine(StartAnimation(other));
 
             }
