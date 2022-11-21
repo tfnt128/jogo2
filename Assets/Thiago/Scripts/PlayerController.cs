@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public RaycastHit hitinfo;
     public bool canOpenDoor = false;
     public int life = 100;
-    public Collider Stairs;
     public PhysicMaterial StairsMaterial;
     private FadeInAndOut fadeInAndOut;
 
@@ -119,6 +118,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!isMoving)
+        {
+            StairsMaterial.staticFriction = 5;
+            StairsMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
+        }
+        else
+        {
+            StairsMaterial.staticFriction = 0;
+            StairsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+        }
 
         if (life <= 0)
         {
@@ -138,38 +147,12 @@ public class PlayerController : MonoBehaviour
         {
             TankControlUpdate();
         }
-        //  _playerMoveInput = GetMoveInput();
-        //   _playerCenterPoint = MyRb.position + _capsuleCollider.center;
+          _playerMoveInput = GetMoveInput();
+          _playerCenterPoint = MyRb.position + _capsuleCollider.center;
         // _playerMoveInput = PlayerStairs();
         // _playerMoveInput = PlayerSlope();
         //   _playerIsGrounded = PlayerGroundCheck();
         //  _playerMoveInput.y = PlayerFallGravity();
-
-
-        if (!isMoving)
-        {
-            // Stairs.material.staticFriction = 5;
-          //  StairsMaterial.staticFriction = 5;
-          //  StairsMaterial.frictionCombine = PhysicMaterialCombine.Maximum;
-        }
-        else
-        {
-            // Stairs.material.staticFriction = 0;
-         //   StairsMaterial.staticFriction = 0;
-          //  StairsMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
-        }
-
-        if (isRunning)
-        {
-          //  _ascendingStairsMovementMultiplier = 1000.0f;
-        }
-        else
-        {
-          //  _ascendingStairsMovementMultiplier = 3500.0f;
-        }
-
-
-
 
 
        // Debug.DrawRay(MyRb.position, MyRb.transform.TransformDirection(_playerMoveInput), Color.red, 1.0f);

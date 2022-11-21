@@ -40,15 +40,6 @@ public class ItemDestription : MonoBehaviour
         if (inReach && Input.GetKeyDown(KeyCode.E) && inReach && !playAnotherScript)
         {
             
-            if (endDilogues && dialogue.dialogueVertexAnimator.hadEnded)
-            {
-                pressed = 0;
-                dialogue.textBox.text = "";
-                dialogue.textBox.enabled = false;
-                Time.timeScale = 1;
-                videoPlayer.Play();
-                isMessaging = false;
-            }
             if (has2Dialogues)
             {               
                 if (pressed == 0)
@@ -67,12 +58,14 @@ public class ItemDestription : MonoBehaviour
                         dialogue.dialogueVertexAnimator.hadEnded = false;
                         pressed++;
                         pressed++;
+                        Time.timeScale = 0;
                         dialogue.PlayDialogue2();
                         isMessaging = true;
                     }
                     else
                     {
                         pressed++;
+                        Time.timeScale = 0;
                         dialogue.AcelerateDialogue();
                     }                   
                 }
@@ -81,6 +74,7 @@ public class ItemDestription : MonoBehaviour
                     dialogue.dialogueVertexAnimator.hadEnded = false;
                     dialogue.BackToNormalDialogue();
                     pressed++;
+                    Time.timeScale = 0;
                     dialogue.PlayDialogue2();                   
                     isMessaging = true;
 
@@ -102,7 +96,8 @@ public class ItemDestription : MonoBehaviour
                     {                        
                         dialogue.AcelerateDialogue();
                         pressed++;
-                       // endDilogues = true;
+                        Time.timeScale = 0;
+                        // endDilogues = true;
                     }                 
                 }
                 else if(pressed == 4 && dialogue.dialogueVertexAnimator.hadEnded)
@@ -142,6 +137,7 @@ public class ItemDestription : MonoBehaviour
                     else
                     {
                         pressed++;
+                        Time.timeScale = 0;
                         dialogue.AcelerateDialogue();
                     }
                 }

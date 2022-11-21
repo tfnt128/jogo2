@@ -1,10 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
-using UnityEngine.ProBuilder.Shapes;
-using Unity.VisualScripting;
-using UnityEngine.SceneManagement;
 
 public class FadeInAndOut : MonoBehaviour
 {
@@ -23,31 +18,59 @@ public class FadeInAndOut : MonoBehaviour
     public DialogueManager[] dialoguesKey = new DialogueManager[2];
     public DialogueManager[] dialoguesItem = new DialogueManager[2];
     public int itemNumber;
+
+    public bool canClose;
     private void Update()
     {
         if (act)
         {
             act = false;
-            StartCoroutine(FadeInFadeOut());             
+            StartCoroutine(FadeInFadeOut());
         }
-        if(Input.GetKeyDown(KeyCode.E) && Time.timeScale == 0)
+        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale == 0)
         {
             if (isKey)
             {
-                isKey = false;
-                dialoguesKey[keyNumber].textBox.text = "";
-                dialoguesKey[keyNumber].textBox.enabled = false;
+                if (dialoguesKey[keyNumber].dialogueVertexAnimator.hadEnded)
+                {
+                    StartCoroutine(canCloseText());
+                    if (canClose)
+                    {
+                        dialoguesKey[keyNumber].textBox.text = "";
+                        dialoguesKey[keyNumber].textBox.enabled = false;
+                        Time.timeScale = 1;
+                        canClose = false;
+                        isKey = false;
+                    }
+                    
+                }
+                else
+                {
+                    dialoguesKey[keyNumber].AcelerateDialogue();
+                }
             }
             else
             {
-                dialoguesItem[itemNumber].textBox.text = "";
-                dialoguesItem[itemNumber].textBox.enabled = false;
+                if (dialoguesItem[itemNumber].dialogueVertexAnimator.hadEnded)
+                {
+                    StartCoroutine(canCloseText());
+                    if (canClose)
+                    {
+                        dialoguesItem[itemNumber].textBox.text = "";
+                        dialoguesItem[itemNumber].textBox.enabled = false;
+                        Time.timeScale = 1;
+                        canClose = false;
+                        isKey = false;
+                    }
+                    
+                }
+                else
+                {
+                    dialoguesItem[itemNumber].AcelerateDialogue();
+                }
             }
-            
-            
-            Time.timeScale = 1;
         }
-        
+
     }
     IEnumerator FadeInFadeOut()
     {
@@ -63,10 +86,10 @@ public class FadeInAndOut : MonoBehaviour
         {
             InventoryManager.Instance.AddItem(key, 1);
             dialoguesKey[keyNumber].textBox.enabled = true;
-            dialoguesKey[keyNumber].PlayDialogue1();            
+            dialoguesKey[keyNumber].PlayDialogue1();
             Time.timeScale = 0;
         }
-        else 
+        else
         {
             dialoguesItem[itemNumber].textBox.enabled = true;
             dialoguesItem[itemNumber].PlayDialogue1();
@@ -80,12 +103,12 @@ public class FadeInAndOut : MonoBehaviour
             {
                 InventoryManager.Instance.AddItem(item2, 1);
             }
-            
+
 
         }
         //yield return new WaitForSeconds(1f);
         //SceneManager.UnloadSceneAsync("InventoryScene", UnloadSceneOptions.None);
-        
+
         FadeOut.SetActive(false);
         FadeIn.SetActive(true);
     }
@@ -94,6 +117,12 @@ public class FadeInAndOut : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         isFandingIn = false;
+        canClose = false;
 
+    }
+    IEnumerator canCloseText()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
+        canClose = true;
     }
 }

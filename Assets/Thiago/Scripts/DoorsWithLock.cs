@@ -103,9 +103,17 @@ public class DoorsWithLock : MonoBehaviour
             {
                 if (player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
                 {
-                    player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = false;
-                    player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.text = "";
-                    player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.enabled = false;
+                    if (player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.dialogueVertexAnimator.hadEnded)
+                    {
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging = false;
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.text = "";
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.textBox.enabled = false;
+                    }
+                    else
+                    {
+                        player.hitinfo.collider.GetComponent<DoorsWithLock>().dialogue.AcelerateDialogue();
+                    }
+                    
                 }
             }
             IEnumerator Order()
