@@ -23,6 +23,13 @@ public class ItemDestription : MonoBehaviour
             inReach = true;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            pressed = 0;
+        }
+    }
 
     void OnTriggerExit(Collider other)
     {
@@ -55,8 +62,7 @@ public class ItemDestription : MonoBehaviour
                 {
                     if (dialogue.dialogueVertexAnimator.hadEnded)
                     {
-                        dialogue.dialogueVertexAnimator.hadEnded = false;
-                        pressed++;
+                        dialogue.dialogueVertexAnimator.hadEnded = false;                 
                         pressed++;
                         Time.timeScale = 0;
                         dialogue.PlayDialogue2();
@@ -64,22 +70,11 @@ public class ItemDestription : MonoBehaviour
                     }
                     else
                     {
-                        pressed++;
                         Time.timeScale = 0;
                         dialogue.AcelerateDialogue();
                     }                   
                 }
-                else if(pressed == 2 && dialogue.dialogueVertexAnimator.hadEnded)
-                {
-                    dialogue.dialogueVertexAnimator.hadEnded = false;
-                    dialogue.BackToNormalDialogue();
-                    pressed++;
-                    Time.timeScale = 0;
-                    dialogue.PlayDialogue2();                   
-                    isMessaging = true;
-
-                }
-                else if(pressed == 3)
+                else if(pressed == 2)
                 {
                     if (dialogue.dialogueVertexAnimator.hadEnded)
                     {
@@ -90,25 +85,12 @@ public class ItemDestription : MonoBehaviour
                         Time.timeScale = 1;
                         videoPlayer.Play();
                         isMessaging = false;
-                       // endDilogues = true;
                     }
                     else
                     {                        
                         dialogue.AcelerateDialogue();
-                        pressed++;
                         Time.timeScale = 0;
-                        // endDilogues = true;
                     }                 
-                }
-                else if(pressed == 4 && dialogue.dialogueVertexAnimator.hadEnded)
-                {
-                    dialogue.dialogueVertexAnimator.hadEnded = false;
-                    pressed = 0;
-                    dialogue.textBox.text = "";
-                    dialogue.textBox.enabled = false;
-                    Time.timeScale = 1;
-                    videoPlayer.Play();
-                    isMessaging = false;
                 }
             }
             else
@@ -120,7 +102,6 @@ public class ItemDestription : MonoBehaviour
                     dialogue.textBox.enabled = true;
                     dialogue.PlayDialogue1();
                     Time.timeScale = 0;
-                    videoPlayer.Pause();
                     isMessaging = true;
                 }
                 else if(pressed == 1 && !endDilogues)
@@ -136,19 +117,9 @@ public class ItemDestription : MonoBehaviour
                     }
                     else
                     {
-                        pressed++;
                         Time.timeScale = 0;
                         dialogue.AcelerateDialogue();
                     }
-                }
-                else if(pressed == 2 && !endDilogues && dialogue.dialogueVertexAnimator.hadEnded)
-                {
-                    pressed = 0;
-                    dialogue.textBox.text = "";
-                    dialogue.textBox.enabled = false;
-                    Time.timeScale = 1;
-                    videoPlayer.Play();
-                    isMessaging = false;
                 }
             }
         }
