@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
     private bool canStopAnim;
     private float verticalSpeed = 3.8f;
     private float horizontalSpeed = 150f;
-    public float velocityX = 0.0f;
-    public float velocityY = 0.0f;
+    public float velocityX, finalVelocityX = 0.0f;
+    public float velocityY, finalVelocityY = 0.0f;
 
     [Header("ModernController")]
     private GameObject currentCamera;
@@ -451,8 +451,8 @@ public class PlayerController : MonoBehaviour
     private void TankControlUpdate()
     {
         MovementAnimationTank();
-        anim.SetFloat("Velocity", velocityY);
-        anim.SetFloat("VelocityX", velocityX);
+        anim.SetFloat("Velocity", finalVelocityY);
+        anim.SetFloat("VelocityX", finalVelocityX);
         if (canMove)
         {
 
@@ -601,13 +601,22 @@ public class PlayerController : MonoBehaviour
         {
             velocityY = 1.0f;
         }
-
-
-
+        if (velocityY <1.1 && velocityY > 0.9)
         {
-
+            finalVelocityY = 1;
         }
-
+        else
+        {
+            finalVelocityY = velocityY;
+        }
+        if (velocityX < 0.1 && velocityX > -0.1)
+        {
+            finalVelocityX = 0;
+        }
+        else
+        {
+            finalVelocityX = velocityX;
+        }
     }
 
     private void ModernControllerUpdate()
