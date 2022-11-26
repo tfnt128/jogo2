@@ -553,10 +553,10 @@ public class PlayerController : MonoBehaviour
         {
             velocityY += Time.deltaTime * BlendTreeAcceleration;
         }
-        //if (forwardPressed && runPressed && velocityY < 3.0f)
-        //{
-        //    velocityY += Time.deltaTime * BlendTreeAcceleration;
-        //}
+        if (forwardPressed && runPressed && velocityY < 3.0f)
+        {
+            velocityY += Time.deltaTime * BlendTreeAcceleration;
+        }
         if (forwardPressed && !isRunning && velocityY > 2.0f)
         {
             velocityY -= Time.deltaTime * BlendTreeDeceleration;
