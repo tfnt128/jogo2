@@ -23,6 +23,7 @@ public class FPSController : MonoBehaviour
     private Vector2 currentInput;
 
     private float rotationX = 0;
+    public bool canMove;
 
     void Awake()
     {
@@ -33,12 +34,16 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-        HandleMovementInput();
-        HandleMouseLook();
+        if (canMove)
+        {
+            HandleMovementInput();
+            HandleMouseLook();
 
-        HandleResetCheck();
+            HandleResetCheck();
 
-        ApplyFinalMovements();
+            ApplyFinalMovements();
+        }
+        
     }
 
     private void CacheComponents()

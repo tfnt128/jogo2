@@ -541,82 +541,91 @@ public class PlayerController : MonoBehaviour
 
     private void MovementAnimationTank()
     {
-
-        bool forwardPressed = Input.GetKey("w");
-        bool rightPressed = Input.GetKey("d");
-        bool leftpressed = Input.GetKey("a");
-        bool runPressed = Input.GetKey("left shift");
-
-
-
-        if (forwardPressed && velocityY < 2.0f)
+        if (canMove)
         {
-            velocityY += Time.deltaTime * BlendTreeAcceleration;
-        }
-        if (forwardPressed && runPressed && velocityY < 3.0f)
-        {
-            velocityY += Time.deltaTime * BlendTreeAcceleration;
-        }
-        if (forwardPressed && !isRunning && velocityY > 2.0f)
-        {
-            velocityY -= Time.deltaTime * BlendTreeDeceleration;
-        }
-        if (!forwardPressed && velocityY > 1.0f)
-        {
-            velocityY -= Time.deltaTime * BlendTreeDeceleration;
-        }
-        if (!forwardPressed && !isBacking && velocityY < 1.0f)
-        {
-            velocityY += Time.deltaTime * BlendTreeAcceleration;
-        }
-        if (isBacking && velocityY > 0.0f)
-        {
-            velocityY -= Time.deltaTime * BlendTreeDeceleration;
-        }
+            bool forwardPressed = Input.GetKey("w");
+            bool rightPressed = Input.GetKey("d");
+            bool leftpressed = Input.GetKey("a");
+            bool runPressed = Input.GetKey("left shift");
 
 
 
-        if (rightPressed && !leftpressed && !forwardPressed && !isBacking && velocityX < 1.0f)
-        {
-            velocityX += Time.deltaTime * BlendTreeAcceleration;
-        }
-        if (!rightPressed && leftpressed && !forwardPressed && velocityX > -1.0f)
-        {
-            velocityX -= Time.deltaTime * BlendTreeDeceleration;
-        }
-        if (!rightPressed && !leftpressed && velocityX < 0.0f)
-        {
-            velocityX += Time.deltaTime * BlendTreeAcceleration;
-        }
-        if (!rightPressed && !leftpressed && velocityX > 0.0f)
-        {
-            velocityX -= Time.deltaTime * BlendTreeDeceleration;
-        }
-        if (!canMove && velocityX != 0.0f)
-        {
-            velocityX = 0.0f;
+            if (forwardPressed && velocityY < 2.0f)
+            {
+                velocityY += Time.deltaTime * BlendTreeAcceleration;
+            }
+            else if (forwardPressed && runPressed && velocityY < 3.0f)
+            {
+                velocityY += Time.deltaTime * BlendTreeAcceleration;
+            }
+            else if (forwardPressed && !isRunning && velocityY > 2.0f)
+            {
+                velocityY -= Time.deltaTime * BlendTreeDeceleration;
+            }
+            else if (!forwardPressed && velocityY > 1.0f)
+            {
+                velocityY -= Time.deltaTime * BlendTreeDeceleration;
+            }
+            else if (!forwardPressed && !isBacking && velocityY < 1.0f)
+            {
+                velocityY += Time.deltaTime * BlendTreeAcceleration;
+            }
+            else if (isBacking && velocityY > 0.0f)
+            {
+                velocityY -= Time.deltaTime * BlendTreeDeceleration;
+            }
 
+
+
+            if (rightPressed && !leftpressed && !forwardPressed && !isBacking && velocityX < 1.0f)
+            {
+                velocityX += Time.deltaTime * BlendTreeAcceleration;
+            }
+            else if (!rightPressed && leftpressed && !forwardPressed && velocityX > -1.0f)
+            {
+                velocityX -= Time.deltaTime * BlendTreeDeceleration;
+            }
+            else if (!rightPressed && !leftpressed && velocityX < 0.0f)
+            {
+                velocityX += Time.deltaTime * BlendTreeAcceleration;
+            }
+            else if (!rightPressed && !leftpressed && velocityX > 0.0f)
+            {
+                velocityX -= Time.deltaTime * BlendTreeDeceleration;
+            }
+            else if (!canMove && velocityX != 0.0f)
+            {
+                velocityX = 0.0f;
+
+            }
+            if (!canMove && velocityY != 0.0f)
+            {
+                velocityY = 1.0f;
+            }
+            if (velocityY < 1.1 && velocityY > 0.9)
+            {
+                finalVelocityY = 1;
+            }
+            else
+            {
+                finalVelocityY = velocityY;
+            }
+            if (velocityX < 0.1 && velocityX > -0.1)
+            {
+                finalVelocityX = 0;
+            }
+            else
+            {
+                finalVelocityX = velocityX;
+            }
         }
-        if (!canMove && velocityY != 0.0f)
-        {
-            velocityY = 1.0f;
-        }
-        if (velocityY <1.1 && velocityY > 0.9)
+        else
         {
             finalVelocityY = 1;
-        }
-        else
-        {
-            finalVelocityY = velocityY;
-        }
-        if (velocityX < 0.1 && velocityX > -0.1)
-        {
             finalVelocityX = 0;
         }
-        else
-        {
-            finalVelocityX = velocityX;
-        }
+
+        
     }
 
     private void ModernControllerUpdate()
