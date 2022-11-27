@@ -1,6 +1,8 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class SwitchPlayers : MonoBehaviour
 {
@@ -11,14 +13,42 @@ public class SwitchPlayers : MonoBehaviour
     public bool isClose;
     public GameObject pauseScreen;
     bool canSwicth;
-    public Animator anim;
+    public GameObject virtualCamera;
+
+    public Transform player;
+    public Transform zoomOUT;
+    public Transform zoomIN;
+
+
+    public float transitionSpeed;
+    public bool canZoomOUT;
+    public bool canZoomIN;
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        //zoomOUT.transform.rotation = virtualCamera.transform.rotation;
+        if (canZoomIN)
         {
+            virtualCamera.transform.position = Vector3.Lerp(virtualCamera.transform.position, zoomIN.position, Time.deltaTime * transitionSpeed);
+            virtualCamera.transform.rotation = Quaternion.Lerp(virtualCamera.transform.rotation, zoomIN.rotation, Time.deltaTime * transitionSpeed);
 
+           // player.transform.rotation = Quaternion.Lerp(player.transform.rotation, zoomOUT.rotation, Time.deltaTime * transitionSpeed);
+            // ;
+
+        }
+        if(canZoomOUT)
+        {
+            virtualCamera.transform.position = Vector3.Lerp(virtualCamera.transform.position, zoomOUT.position, Time.deltaTime * transitionSpeed);
+            virtualCamera.transform.rotation = Quaternion.Lerp(virtualCamera.transform.rotation, zoomOUT.rotation, Time.deltaTime * transitionSpeed);
+          //  virtualCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+           // player.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+            // player.transform.rotation = Quaternion.Lerp(player.transform.rotation, zoomOUT.rotation, Time.deltaTime * transitionSpeed);
+
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {            
             switchPlayer();
         }
     }
@@ -29,7 +59,11 @@ public class SwitchPlayers : MonoBehaviour
             isClose = false;
             canSwicth = false;
             if (isSecondPerson)
-            {               
+            {
+
+                canZoomOUT = true; 
+                //virtualCamera.transform.position = zoomOUT.position;
+               // virtualCamera.transform.rotation = zoomOUT.rotation;
                 TVPlayer.SetActive(true);
                 pauseScreen.SetActive(true);
                 PrisonPlayer.canMove = false;
@@ -37,11 +71,18 @@ public class SwitchPlayers : MonoBehaviour
             }
             else
             {
+
+                canZoomIN = true;
+                //virtualCamera.transform.position = zoomIN.position;
+                //virtualCamera.transform.rotation = zoomIN.rotation;
+                // ZoomCamera(25);
                 FPSController.canMove = false;
                 StartCoroutine(enterTV());
             }
         }
     }
+
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -52,8 +93,8 @@ public class SwitchPlayers : MonoBehaviour
                 isClose = true;
             }
         }
-        
-        
+
+
     }
     private void OnTriggerExit(Collider other)
     {
@@ -64,22 +105,28 @@ public class SwitchPlayers : MonoBehaviour
     }
     IEnumerator enterTV()
     {
-        anim.SetTrigger("OUT");
+        //anim.SetTrigger("OUT");
         yield return new WaitForSeconds(1f);
+       // player.transform.rotation = new Quaternion(0, 0, 0, 0);
         isSecondPerson = !isSecondPerson;
         isClose = true;
         canSwicth = true;
         TVPlayer.SetActive(false);
         pauseScreen.SetActive(false);
         PrisonPlayer.canMove = true;
+        canZoomIN = false;
+        canZoomOUT = false;
     }
     IEnumerator exitTV()
     {
         yield return new WaitForSeconds(1f);
+      //  player.transform.rotation = new Quaternion(0, 0, 0, 0);
         isSecondPerson = !isSecondPerson;
         isClose = true;
         canSwicth = true;
         FPSController.canMove = true;
+        canZoomIN = false;
+        canZoomOUT = false;
     }
 }
 
