@@ -147,8 +147,8 @@ public class PlayerController : MonoBehaviour
         {
             TankControlUpdate();
         }
-          _playerMoveInput = GetMoveInput();
-          _playerCenterPoint = MyRb.position + _capsuleCollider.center;
+        //  _playerMoveInput = GetMoveInput();
+        //  _playerCenterPoint = MyRb.position + _capsuleCollider.center;
         // _playerMoveInput = PlayerStairs();
         // _playerMoveInput = PlayerSlope();
         //   _playerIsGrounded = PlayerGroundCheck();
@@ -736,10 +736,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private Vector3 GetMoveInput()
-    {
-        return new Vector3(_input.MoveInput.x, 0.0f, _input.MoveInput.y);
-    }
+ 
 
 
     private void OnTriggerStay(Collider other)

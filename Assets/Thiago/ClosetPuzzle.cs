@@ -36,7 +36,7 @@ public class ClosetPuzzle : MonoBehaviour
             destription.dialogue.textBox.text = "";
             destription.dialogue.textBox.enabled = false;
             Time.timeScale = 1;
-            destription.videoPlayer.Play();
+           // destription.videoPlayer.Play();
             destription.isMessaging = false;
             destription.gameObject.SetActive(false);
             Destroy(closetMsg1);
@@ -68,7 +68,7 @@ public class ClosetPuzzle : MonoBehaviour
         destription.dialogue.textBox.enabled = true;
         destription.dialogue.PlayDialogue1();
         Time.timeScale = 0;
-        destription.videoPlayer.Pause();
+       // destription.videoPlayer.Pause();
         destription.isMessaging = true;
         canClose = true;
     }

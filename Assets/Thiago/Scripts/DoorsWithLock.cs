@@ -14,7 +14,7 @@ public class DoorsWithLock : MonoBehaviour
     public DialogueManager dialogue;
     public bool isMessaging = false;
     public bool canSpawnMsg = false;
-    public VideoPlayer videoPlayer;
+   // public VideoPlayer videoPlayer;
 
     AudioSource audioSource;
 
@@ -138,7 +138,7 @@ public class DoorsWithLock : MonoBehaviour
             isMessaging = false;
             dialogue.textBox.text = "";
             dialogue.textBox.enabled = false;
-            videoPlayer.Play();
+           // videoPlayer.Play();
         }
 
 

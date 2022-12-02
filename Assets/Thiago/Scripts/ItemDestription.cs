@@ -4,7 +4,7 @@ using UnityEngine.Video;
 public class ItemDestription : MonoBehaviour
 {
     //  public string description = "Description";
-    public VideoPlayer videoPlayer;
+   // public VideoPlayer videoPlayer;
     public DialogueManager dialogue;
 
     public bool inReach;
@@ -55,7 +55,7 @@ public class ItemDestription : MonoBehaviour
                     dialogue.textBox.enabled = true;
                     dialogue.PlayDialogue1();
                     Time.timeScale = 0;
-                    videoPlayer.Pause();
+                   // videoPlayer.Pause();
                     isMessaging = true;
                 }
                 else if (pressed == 1)
@@ -83,7 +83,7 @@ public class ItemDestription : MonoBehaviour
                         dialogue.textBox.text = "";
                         dialogue.textBox.enabled = false;
                         Time.timeScale = 1;
-                        videoPlayer.Play();
+                      //  videoPlayer.Play();
                         isMessaging = false;
                     }
                     else
@@ -112,7 +112,7 @@ public class ItemDestription : MonoBehaviour
                         dialogue.textBox.text = "";
                         dialogue.textBox.enabled = false;
                         Time.timeScale = 1;
-                        videoPlayer.Play();
+                     //   videoPlayer.Play();
                         isMessaging = false;
                     }
                     else

@@ -85,8 +85,8 @@ public class FPSController : MonoBehaviour
 
     public void LockCursor(CursorLockMode lockMode)
     {
-        Cursor.lockState = lockMode;
-        Cursor.visible = lockMode == CursorLockMode.Locked ? false : true;
+      //  Cursor.lockState = lockMode;
+       // Cursor.visible = lockMode == CursorLockMode.Locked ? false : true;
     }
 
     public void HandleResetCheck()

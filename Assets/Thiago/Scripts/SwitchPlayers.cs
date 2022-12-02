@@ -23,7 +23,8 @@ public class SwitchPlayers : MonoBehaviour
     public float transitionSpeed;
     public bool canZoomOUT;
     public bool canZoomIN;
-
+    public Light light;
+    public GameObject planeDark;
 
     void Update()
     {
@@ -67,6 +68,8 @@ public class SwitchPlayers : MonoBehaviour
                 TVPlayer.SetActive(true);
                 pauseScreen.SetActive(true);
                 PrisonPlayer.canMove = false;
+                light.intensity = 30.0f;
+                planeDark.SetActive(false);
                 StartCoroutine(exitTV());
             }
             else
@@ -77,6 +80,7 @@ public class SwitchPlayers : MonoBehaviour
                 //virtualCamera.transform.rotation = zoomIN.rotation;
                 // ZoomCamera(25);
                 FPSController.canMove = false;
+                light.intensity = 10.0f;
                 StartCoroutine(enterTV());
             }
         }
@@ -107,7 +111,8 @@ public class SwitchPlayers : MonoBehaviour
     {
         //anim.SetTrigger("OUT");
         yield return new WaitForSeconds(1f);
-       // player.transform.rotation = new Quaternion(0, 0, 0, 0);
+        // player.transform.rotation = new Quaternion(0, 0, 0, 0);
+        planeDark.SetActive(true);
         isSecondPerson = !isSecondPerson;
         isClose = true;
         canSwicth = true;
