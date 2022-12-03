@@ -719,9 +719,9 @@ public class PlayerController : MonoBehaviour
 
     private void RaycastForDoor()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.5f, Color.green);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 0.7f, Color.green);
 
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 1.5f, doorLayer))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitinfo, 0.7f, doorLayer))
         {
 
             canOpenDoor = true;

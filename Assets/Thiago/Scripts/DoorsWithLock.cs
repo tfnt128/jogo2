@@ -88,7 +88,7 @@ public class DoorsWithLock : MonoBehaviour
                 }
                 else if (player.hitinfo.collider.GetComponent<DoorsWithLock>().unlocked && !player.hitinfo.collider.GetComponent<DoorsWithLock>().isMessaging)
                 {
-
+                    
                     player.canMove = false;
                     player.hitinfo.collider.GetComponent<DoorsWithLock>().GetComponent<AudioSource>().clip = audioClipsArray[0];
                     player.hitinfo.collider.GetComponent<DoorsWithLock>().GetComponent<AudioSource>().Play();
@@ -145,18 +145,23 @@ public class DoorsWithLock : MonoBehaviour
 
         IEnumerator changeRoom()
         {
+            Vector3 posIn = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).position;
+            Vector3 posOut = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).position;
+            Quaternion rotIn = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).rotation;
+            Quaternion rotOut = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).rotation;
+            bool posDoor = player.hitinfo.collider.GetComponent<DoorsWithLock>().playerIn;
             fadeOut.SetActive(true);
             fadeIn.SetActive(false);
             yield return new WaitForSeconds(2.5f);
-            if (player.hitinfo.collider.GetComponent<DoorsWithLock>().playerIn)
+            if (posDoor)
             {
-                player.transform.position = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).position;
-                player.transform.rotation = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(1).rotation;
+                player.transform.position = posIn;
+                player.transform.rotation = rotIn;
             }
             else
             {
-                player.transform.position = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).position;
-                player.transform.rotation = player.hitinfo.collider.GetComponent<DoorsWithLock>().gameObject.transform.GetChild(0).rotation;
+                player.transform.position = posOut;
+                player.transform.rotation = rotOut;
             }
             fadeOut.SetActive(false);
             fadeIn.SetActive(true);
